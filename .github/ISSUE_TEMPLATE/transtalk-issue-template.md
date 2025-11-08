@@ -7,13 +7,11 @@ assignees: ''
 
 ---
 
-## 🛠 Task Description
+## 📝 Work purpose
+- 
 
-<!-- Description -->
+## 🔍 Work detail
+- 
 
-## 📝 TO-DO
-
-- [ ] todo1
-- [ ] todo2
-
-## 🔔ETC
+## ✅ Checklist
+- [ ] checklist 1
