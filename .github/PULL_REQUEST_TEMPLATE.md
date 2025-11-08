@@ -6,10 +6,9 @@
 
 <!--- describe detail changes and related issues -->
 
-- [x] 작업 내역
-- [x] 작업 내역
-- [x] 작업 내역
-- [x] 작업 내역
+- [x] detail1
+- [x] detail2
+- [x] detail3
 
 ## 💡 PR Highlights
 
