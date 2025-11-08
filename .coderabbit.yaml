@@ -1,0 +1,158 @@
+# Language setting for CodeRabbit (English)
+language: en-US
+
+# Guidelines defining the AI coach's personality and review style
+tone_instructions: >
+  Focus on improvements rather than criticism; follow P1–P5 priority labels; include helpful document references and light, witty praise.
+
+# Code review settings
+reviews:
+  profile: chill # Review style: relaxed and friendly tone
+  request_changes_workflow: false # Do not block merge when requesting changes
+  high_level_summary: true # Provide a high-level PR summary
+  changed_files_summary: false # Disable per-file summaries (avoid redundancy)
+  sequence_diagrams: false # Do not generate sequence diagrams
+  assess_linked_issues: true # Analyze linked issues
+  related_issues: false # Do not suggest related issues
+  related_prs: false # Do not suggest related PRs
+  suggested_labels: false # Do not suggest labels
+  auto_apply_labels: false # Do not auto-apply labels
+  suggested_reviewers: false # Do not suggest reviewers
+  auto_assign_reviewers: false # Do not auto-assign reviewers
+  poem: true # Write a short poem after the review (for fun)
+
+  # Path-specific review guidelines
+  path_instructions:
+    - path: src/** # Backend code
+      instructions: |
+        - 1. Review based on team conventions, readability, exception handling, testability/extensibility/maintainability, modularization, and API/DB/security design.
+        - 2. Also check modern best practices, unnecessary logic, clean code, refactoring, service/domain design, shared exception handling, and extensibility.
+        - 3. For each feedback item, briefly present the issue, an alternative, and pros/cons; include concise code examples when helpful.
+        - 4. Ensure consistency with the team’s coding style.
+        - 5. Leave the comment on the specific line range you’re referring to.
+        - 6. If tests are missing, propose what tests are needed. (e.g., E2E tests for controllers; unit tests elsewhere)
+        - 7. Keep the volume reasonable—focus on what truly matters to avoid reviewer fatigue.
+        - 8. Prioritize security-critical issues and areas likely to cause future incidents.
+
+  # Auto-review behavior
+  abort_on_close: true # Stop reviewing when the PR is closed
+  disable_cache: false # Keep cache enabled for faster, efficient reviews
+  auto_review:
+    enabled: true # Enable automatic reviews
+    auto_incremental_review: false # Disable incremental reviews on new commits
+    base_branches: ['.*']
+
+  # Analysis tools
+  tools:
+    hadolint: # Dockerfile analysis
+      enabled: true
+    gitleaks: # Detect leaked secrets
+      enabled: true
+    sqlfluff: # SQL analysis
+      enabled: true
+
+# Chat and interaction settings
+chat:
+  auto_reply: true # Auto-reply to questions
+
+# Knowledge base settings (documents CodeRabbit may consult)
+knowledge_base:
+  opt_out: false # Allow knowledge base usage (review within this repo)
+
+  web_search:
+    enabled: true # Use web search for up-to-date info
+
+  learnings:
+    scope: local # Limit learnings to the current repository
+
+  issues:
+    scope: local # Limit issue references to the current repository
+
+  pull_requests:
+    scope: local # Limit PR references to the current repository
+
+# Common ground rules (Backend)
+common_ground_rules:
+  # Priority system (Backend) — review priority levels
+  priority_system:
+    P1:
+      description: 'Must address (Request changes)'
+      criteria: 'Critical issues that can cause crashes, security vulnerabilities, memory leaks, or major service failures'
+      action: 'Author must fix or provide a well-reasoned rebuttal'
+
+    P2:
+      description: 'Strongly consider (Request changes)'
+      criteria: 'Performance degradation, architecture violations, or maintainability concerns'
+      action: 'Adopt the suggestion or discuss with rationale'
+
+    P3:
+      description: 'Prefer to address (Comment)'
+      criteria: 'Code conventions, readability improvements, refactoring suggestions'
+      action: 'Address if possible or explain why not; share future plans if deferring'
+
+    P4:
+      description: 'Nice to have (Approve)'
+      criteria: 'Minor improvements; optional suggestions'
+      action: 'Consider briefly; safe to skip if not valuable'
+
+    P5:
+      description: 'Just a casual thought (Approve)'
+      criteria: 'Personal preference; FYI'
+      action: 'Feel free to ignore'
+
+  # Work guidelines (Backend) — efficient development process
+  work_guidelines:
+    goal_setting:
+      - 'Define clear goals when creating issue tickets'
+      - 'Split large tasks into multiple smaller tickets'
+      - 'Keep PRs within ~500 lines for quality reviews'
+      - 'Discuss major changes or new patterns in advance'
+    deadline:
+      - 'Aim to complete reviews within 24 hours'
+      - 'Set and follow feedback deadlines with the team'
+
+  # Reviewer principles (Backend, Android) — constructive review culture
+  reviewer_principles:
+    basic_rules:
+      - 'Focus feedback on code, process, and specs—never on people'
+      - 'Keep personal matters separate from technical critique'
+      - 'Avoid harsh language or blame'
+      - 'Do not sacrifice review quality due to time pressure'
+    reviewer_attitude:
+      - 'Reviews benefit everyone (yourself, the team, the product)'
+      - 'Manage time to meet feedback deadlines'
+      - 'Prioritize and keep feedback concise and focused'
+    feedback_method:
+      constructive:
+        good: 'We could improve this part like so…'
+        bad: 'This code is wrong.'
+      specific:
+        good: 'Using LazyColumn instead of RecyclerView may improve performance.'
+        bad: 'Performance is bad.'
+      discussion:
+        - 'Discuss with sufficient reasoning and evidence'
+    mindset:
+      - 'Reviews are for everyone’s benefit'
+      - 'Everyone makes mistakes—acknowledge quickly and keep an open mind'
+      - 'Praise good code—if nothing else to add, a compliment is fine'
+      - 'Don’t get defensive when receiving feedback'
+      - 'Avoid reviewing just for the sake of reviewing—focus on meaningful feedback'
+
+# Code generation
+code_generation:
+  docstrings:
+    language: en-US
+    path_instructions:
+      - path: src/**
+        instructions: |
+          - Use official Javadoc-style docstrings, written in English.
+          - Clearly state the method’s purpose, parameters, return value, and exceptions.
+          - Provide detailed docs for public/external APIs; summarize concisely for internal methods.
+
+  unit_tests:
+    path_instructions:
+      - path: src/**
+        instructions: |
+          - Controllers: integration (acceptance) tests for API endpoints
+          - Other layers: unit tests for functions/classes
+          - Apply the given-when-then pattern
