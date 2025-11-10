@@ -6,6 +6,7 @@ import GoogleLogo from '@assets/logo/google-logo.svg';
 export default function LoginButton() {
   const navigate = useNavigate();
 
+  // TODO: Social Login API integration
   const handleLogin = () => {
     navigate(ROUTES.HOME);
   };
