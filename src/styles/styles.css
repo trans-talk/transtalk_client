@@ -54,33 +54,23 @@
 }
 
 @layer utilities {
-  .header-24 {
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 150%;
-  }
   .header-20 {
     font-size: 20px;
     font-weight: 700;
     line-height: 150%;
   }
+  .header-16 {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 150%;
+  }
 
-  .title-20 {
-    font-size: 20px;
+  .title-16 {
+    font-size: 16px;
     font-weight: 500;
     line-height: 150%;
   }
 
-  .body-20 {
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 150%;
-  }
-  .body-18 {
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 150%;
-  }
   .body-16 {
     font-size: 16px;
     font-weight: 400;
@@ -91,14 +81,14 @@
     font-weight: 400;
     line-height: 150%;
   }
-
-  .caption-15 {
-    font-size: 15px;
+  .body-12 {
+    font-size: 12px;
     font-weight: 400;
     line-height: 150%;
   }
-  .caption-11 {
-    font-size: 11px;
+
+  .caption-10 {
+    font-size: 10px;
     font-weight: 500;
     line-height: 150%;
   }
