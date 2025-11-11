@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import ArrowLeft from '@assets/ui/arrow-left.svg';
 import Header from '@components/Header';
 import Divider from '@components/Divider';
-import ProfileSections from '@pages/Settings/components/ProfileSections';
-import SettingContents from '@pages/Settings/components/SettingContents';
+
+import ProfileSection from '@pages/Settings/components/ProfileSection';
+import SettingContentSection from '@pages/Settings/components/SettingContentSection';
 import AppFooter from '@pages/Settings/components/AppFooter';
 
 export default function Settings() {
@@ -27,9 +28,9 @@ export default function Settings() {
       >
         <h1 className='header-20'>Settings</h1>
       </Header>
-      <ProfileSections />
+      <ProfileSection />
       <Divider />
-      <SettingContents />
+      <SettingContentSection />
       <AppFooter />
     </>
   );

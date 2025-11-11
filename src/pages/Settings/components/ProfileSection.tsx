@@ -4,7 +4,7 @@ const dummy = {
   email: 'hong@example.com',
 };
 
-export default function ProfileSections() {
+export default function ProfileSection() {
   return (
     <div className='flex flex-col items-center gap-[1.2rem] p-[2rem]'>
       <img
