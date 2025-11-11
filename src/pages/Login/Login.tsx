@@ -3,7 +3,7 @@ import LoginButton from '@pages/Login/components/LoginButton';
 
 export default function Login() {
   return (
-    <div className='flex h-[100dvh] w-full flex-col items-center justify-center gap-[4.5rem]'>
+    <div className='absolute top-1/2 left-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[4.5rem]'>
       <div className='flex flex-col items-center gap-[2.4rem]'>
         <img
           className='h-[8rem] w-[8rem]'
