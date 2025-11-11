@@ -1,3 +1,4 @@
+// TODO: replace with real data
 const dummy = {
   profileImg: 'https://placehold.co/100',
   name: '홍길동',
