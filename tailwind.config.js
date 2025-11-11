@@ -12,8 +12,8 @@ export default {
         '.title-16': { fontSize: '1.6rem', fontWeight: '500' },
         '.body-16': { fontSize: '1.6rem', fontWeight: '400' },
         '.body-14': { fontSize: '1.4rem', fontWeight: '400' },
-        '.body-12': { fontSize: '1.4rem', fontWeight: '400' },
-        '.caption-10': { fontSize: '10rem', fontWeight: '500' },
+        '.body-12': { fontSize: '1.2rem', fontWeight: '400' },
+        '.caption-10': { fontSize: '1rem', fontWeight: '500' },
       };
       addUtilities(newUtilities);
     },
