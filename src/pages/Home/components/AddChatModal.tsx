@@ -38,9 +38,8 @@ export default function AddChatModal({ handleCloseModal }: AddChatModalProps) {
         </button>
         <div className='flex flex-col items-center gap-[1rem]'>
           <h2 className='header-16'>New Chat</h2>
-          <span className='body-14 text-grayscale-4 text-center break-keep whitespace-pre-line'>
-            채팅할 사용자의 e-mail address를 입력하세요. 여러 명을 추가할 수
-            있습니다.
+          <span className='body-14 text-grayscale-4 text-center whitespace-pre-line'>
+            {`채팅할 사용자의 e-mail address를 입력하고\n함께 대화할 언어를 선택해주세요.`}
           </span>
         </div>
         <div className='flex w-full flex-col gap-[1.2rem]'>

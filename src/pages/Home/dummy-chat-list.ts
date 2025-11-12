@@ -1,0 +1,32 @@
+export const dummyChatList = [
+  {
+    chatId: 1,
+    profileImage: 'https://placehold.co/50',
+    name: 'Sarah Johnson',
+    originalMessage: '안녕하세요!',
+    translatedMessage: 'Hello!',
+    language: 'Korean',
+    recentChatTime: '14:30',
+    unreadChatCount: 2,
+  },
+  {
+    chatId: 2,
+    profileImage: 'https://placehold.co/50',
+    name: 'Mike Chen',
+    originalMessage: '안녕하세요!',
+    translatedMessage: 'Hello!',
+    language: 'English',
+    recentChatTime: '11:30',
+    unreadChatCount: 5,
+  },
+  {
+    chatId: 3,
+    profileImage: 'https://placehold.co/50',
+    name: 'Sarah Johnson',
+    originalMessage: '안녕하세요!',
+    translatedMessage: 'Hello!',
+    language: 'Japanese',
+    recentChatTime: '09:30',
+    unreadChatCount: 0,
+  },
+];
