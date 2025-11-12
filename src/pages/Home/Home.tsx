@@ -39,12 +39,21 @@ export default function Home() {
   const handleToSettingPage = () => {
     navigate(ROUTES.SETTINGS);
   };
+  useEffect(() => {
+    const timer = requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    });
+
+    // TODO : connect api. get chat list with search text or none.
+    setChatList(dummyChatList);
+
+    return () => cancelAnimationFrame(timer);
+  }, []);
 
   useEffect(() => {
     // TODO : connect api. get chat list with search text or none.
     setChatList(dummyChatList);
   }, [searchText]);
-
   return (
     <>
       {isSearchMode ? (
