@@ -18,10 +18,7 @@ export default function MessageItem({ message }: MessageItemProps) {
     : `${baseMessageStyle} border bg-grayscale-2 border-grayscale-3 text-grayscale-6 rounded-bl-[0.7rem]`;
 
   return (
-    <div
-      key={message.chatId}
-      className={`flex flex-col gap-[0.5rem] ${messageAlignStyle}`}
-    >
+    <div className={`flex flex-col gap-[0.5rem] ${messageAlignStyle}`}>
       <div className={originalMessageStyle}>{message.original}</div>
       <div className={translatedMessageStyle}>{message.target}</div>
       <span className='text-grayscale-4 px-[1rem]'>{message.chatTime}</span>

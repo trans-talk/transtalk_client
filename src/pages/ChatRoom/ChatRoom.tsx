@@ -35,7 +35,10 @@ export default function ChatRoom() {
 
   useEffect(() => {
     const timer = requestAnimationFrame(() => {
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'instant' });
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: 'instant',
+      });
     });
 
     // TODO : connect api.
