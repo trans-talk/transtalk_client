@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 
 import ArrowLeft from '@assets/ui/arrow-left.svg';
 import Header from '@components/Header';
-import Divider from '@components/Divider';
 
 import ProfileSection from '@pages/Settings/components/ProfileSection';
 import SettingContentSection from '@pages/Settings/components/SettingContentSection';
@@ -29,7 +28,6 @@ export default function Settings() {
         <h1 className='header-20'>Settings</h1>
       </Header>
       <ProfileSection />
-      <Divider />
       <SettingContentSection />
       <AppFooter />
     </>

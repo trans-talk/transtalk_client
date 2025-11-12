@@ -1,3 +1,4 @@
+// TODO: replace with real data
 const dummy = {
   profileImg: 'https://placehold.co/100',
   name: '홍길동',
@@ -6,7 +7,7 @@ const dummy = {
 
 export default function ProfileSection() {
   return (
-    <div className='flex flex-col items-center gap-[1.2rem] p-[2rem]'>
+    <div className='border-grayscale-3 flex flex-col items-center gap-[1.2rem] border-b p-[2rem]'>
       <img
         className='w-[10rem] rounded-full'
         src={dummy.profileImg ?? 'https://placehold.co/100'}
