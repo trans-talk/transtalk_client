@@ -1,0 +1,65 @@
+export const dummyChatRoom = {
+  user: {
+    profileImage: 'https://placehold.co/50',
+    name: 'Sarah Johnson',
+    email: 'example@gmail.com',
+  },
+  messageList: [
+    {
+      chatId: 1,
+      original: '안녕하세요! 어떻게 지내세요?',
+      target: 'Hello! How are you?',
+      isUser: false,
+      chatTime: '14:30',
+    },
+    {
+      chatId: 2,
+      original: '안녕하세요! 어떻게 지내세요?',
+      target: 'Hello! How are you?',
+      isUser: true,
+      chatTime: '14:31',
+    },
+    {
+      chatId: 3,
+      original: '안녕하세요! 어떻게 지내세요?',
+      target: 'Hello! How are you?',
+      isUser: false,
+      chatTime: '14:32',
+    },
+    {
+      chatId: 4,
+      original: '안녕하세요! 어떻게 지내세요?',
+      target: 'Hello! How are you?',
+      isUser: true,
+      chatTime: '14:33',
+    },
+    {
+      chatId: 5,
+      original: '안녕하세요! 어떻게 지내세요?',
+      target: 'Hello! How are you?',
+      isUser: false,
+      chatTime: '14:30',
+    },
+    {
+      chatId: 6,
+      original: '안녕하세요! 어떻게 지내세요?',
+      target: 'Hello! How are you?',
+      isUser: true,
+      chatTime: '14:31',
+    },
+    {
+      chatId: 7,
+      original: '안녕하세요! 어떻게 지내세요?',
+      target: 'Hello! How are you?',
+      isUser: false,
+      chatTime: '14:32',
+    },
+    {
+      chatId: 8,
+      original: '안녕하세요! 어떻게 지내세요?',
+      target: 'Hello! How are you?',
+      isUser: true,
+      chatTime: '14:33',
+    },
+  ],
+};

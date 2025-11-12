@@ -39,14 +39,23 @@ export default function Home() {
   const handleToSettingPage = () => {
     navigate(ROUTES.SETTINGS);
   };
+  useEffect(() => {
+    const timer = requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    });
+
+    // TODO : connect api. get chat list with search text or none.
+    setChatList(dummyChatList);
+
+    return () => cancelAnimationFrame(timer);
+  }, []);
 
   useEffect(() => {
     // TODO : connect api. get chat list with search text or none.
     setChatList(dummyChatList);
   }, [searchText]);
-
   return (
-    <>
+    <div className='pt-[7rem]'>
       {isSearchMode ? (
         <SearchBar
           value={searchText}
@@ -82,6 +91,6 @@ export default function Home() {
       {isModalOpen && <AddChatModal handleCloseModal={handleCloseModal} />}
       <FloatingAddChatButton handleOpenModal={handleOpenModal} />
       <FloatingScrollButton />
-    </>
+    </div>
   );
 }

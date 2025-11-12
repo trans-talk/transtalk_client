@@ -13,7 +13,7 @@ export default function Settings() {
     navigate(-1);
   };
   return (
-    <>
+    <div className='pt-[7rem]'>
       <Header
         left={
           <button
@@ -30,6 +30,6 @@ export default function Settings() {
       <ProfileSection />
       <SettingContentSection />
       <AppFooter />
-    </>
+    </div>
   );
 }

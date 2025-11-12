@@ -17,7 +17,7 @@ export default function SearchBar({
         className='placeholder:text-grayscale-5 bg-grayscale-2 body-14 w-full appearance-none rounded-[3rem] px-[1.5rem] py-[1.2rem]'
         type='search'
         value={value}
-        onChange={e => handleChangeValue(e)}
+        onChange={handleChangeValue}
         placeholder='검색어를 입력하세요..'
       />
 
