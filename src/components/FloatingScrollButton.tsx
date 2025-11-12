@@ -44,11 +44,18 @@ export default function FloatingScrollButton({
 
   if (!isVisible) return null;
 
+  const scrollBaseStyle =
+    'fixed flex items-center justify-center rounded-full bg-white shadow-[0_0_25px_0_rgba(0,0,0,0.10)] transition-transform hover:scale-105';
+
+  const scrollTopStyle = 'right-[2rem] bottom-[10rem] h-[6rem] w-[6rem]';
+  const scrollBottomStyle =
+    'right-[1.5rem] bottom-[7.5rem] h-[4.5rem] w-[4.5rem]';
+
   return (
     <button
       type='button'
       onClick={handleScrollAction}
-      className={`fixed flex items-center justify-center rounded-full bg-white shadow-[0_0_25px_0_rgba(0,0,0,0.10)] transition-transform hover:scale-105 ${isScrollTop ? 'right-[2rem] bottom-[10rem] h-[6rem] w-[6rem]' : 'right-[1.5rem] bottom-[7.5rem] h-[4.5rem] w-[4.5rem]'}`}
+      className={`${scrollBaseStyle} ${isScrollTop ? scrollTopStyle : scrollBottomStyle}`}
     >
       <img
         className='w-[2.1rem]'
