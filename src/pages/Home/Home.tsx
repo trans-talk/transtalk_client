@@ -55,7 +55,7 @@ export default function Home() {
     setChatList(dummyChatList);
   }, [searchText]);
   return (
-    <>
+    <div className='pt-[7rem]'>
       {isSearchMode ? (
         <SearchBar
           value={searchText}
@@ -91,6 +91,6 @@ export default function Home() {
       {isModalOpen && <AddChatModal handleCloseModal={handleCloseModal} />}
       <FloatingAddChatButton handleOpenModal={handleOpenModal} />
       <FloatingScrollButton />
-    </>
+    </div>
   );
 }

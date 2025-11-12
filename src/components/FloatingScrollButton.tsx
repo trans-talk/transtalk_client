@@ -4,7 +4,6 @@ import ArrowUp from '@assets/ui/arrow-up.svg';
 import ArrowDown from '@assets/ui/arrow-down.svg';
 
 interface FloatingScrollButtonProps {
-  /** true → 위로 스크롤 / false → 아래로 스크롤 */
   isScrollTop?: boolean;
 }
 
@@ -18,8 +17,6 @@ export default function FloatingScrollButton({
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
 
-    // 위로 가는 버튼일 때: 일정 스크롤 이상일 때 보이기
-    // 아래로 가는 버튼일 때: 화면이 완전히 맨 아래가 아닐 때 보이기
     if (isScrollTop) {
       setIsVisible(scrollTop > 1);
     } else {
@@ -51,7 +48,7 @@ export default function FloatingScrollButton({
     <button
       type='button'
       onClick={handleScrollAction}
-      className='fixed right-[2rem] bottom-[10rem] flex h-[6rem] w-[6rem] items-center justify-center rounded-full bg-white shadow-[0_0_25px_0_rgba(0,0,0,0.10)] transition-transform hover:scale-105'
+      className={`fixed flex items-center justify-center rounded-full bg-white shadow-[0_0_25px_0_rgba(0,0,0,0.10)] transition-transform hover:scale-105 ${isScrollTop ? 'right-[2rem] bottom-[10rem] h-[6rem] w-[6rem]' : 'right-[1.5rem] bottom-[7.5rem] h-[4.5rem] w-[4.5rem]'}`}
     >
       <img
         className='w-[2.1rem]'

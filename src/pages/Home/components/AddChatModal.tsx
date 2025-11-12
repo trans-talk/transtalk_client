@@ -58,11 +58,11 @@ export default function AddChatModal({ handleCloseModal }: AddChatModalProps) {
             <option value='' disabled className='text-grayscale-5'>
               번역 언어
             </option>
-            <option value='KO'>Korean</option>
-            <option value='EN'>English</option>
-            <option value='JA'>Japanese</option>
-            <option value='ZH'>Chinese</option>
-            <option value='ES'>Spanish</option>
+            <option value='ko'>Korean</option>
+            <option value='en'>English</option>
+            <option value='ja'>Japanese</option>
+            <option value='zh'>Chinese</option>
+            <option value='es'>Spanish</option>
           </select>
         </div>
         <button

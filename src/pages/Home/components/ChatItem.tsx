@@ -26,8 +26,7 @@ export default function ChatItem({
 
   // TODO : update navigate logic
   const handleToChatRoom = () => {
-    alert(`${chatId}번 방으로 이동`);
-    navigate(ROUTES.HOME);
+    navigate(`${ROUTES.CHAT_ROOM}/${chatId}`);
   };
 
   return (
@@ -59,9 +58,11 @@ export default function ChatItem({
                 {translatedMessage}
               </span>
             </div>
-            <div className='bg-primary-5 body-12 flex h-[2rem] w-[2rem] items-center justify-center rounded-full text-white'>
-              {unreadChatCount}
-            </div>
+            {unreadChatCount !== 0 && (
+              <div className='bg-primary-5 body-12 flex h-[2rem] w-[2rem] items-center justify-center rounded-full text-white'>
+                {unreadChatCount}
+              </div>
+            )}
           </div>
         </div>
       </div>

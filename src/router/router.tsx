@@ -5,6 +5,7 @@ import Layout from '@router/Layout';
 import Home from '@pages/Home/Home';
 import Login from '@pages/Login/Login';
 import Settings from '@pages/Settings/Settings';
+import ChatRoom from '@pages/ChatRoom/ChatRoom';
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ export const router = createBrowserRouter([
         path: ROUTES.LOGIN,
         element: <Login />,
       },
+      { path: ROUTES.CHAT_ROOM + '/:chatRoomId', element: <ChatRoom /> },
       {
         path: ROUTES.SETTINGS,
         element: <Settings />,
