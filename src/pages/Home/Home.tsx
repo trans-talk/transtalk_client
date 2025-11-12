@@ -62,14 +62,14 @@ export default function Home() {
                 className='flex h-[3.5rem] w-[3.5rem] items-center justify-center'
                 onClick={handleOpenSearchMode}
               >
-                <img src={SearchIcon} alt='Go Back Button' />
+                <img src={SearchIcon} alt='Search' />
               </button>
               <button
                 type='button'
                 className='flex h-[3.5rem] w-[3.5rem] items-center justify-center'
                 onClick={handleToSettingPage}
               >
-                <img src={SettingIcon} alt='Go Back Button' />
+                <img src={SettingIcon} alt='Settings' />
               </button>
             </div>
           }
