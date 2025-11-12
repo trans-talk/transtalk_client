@@ -11,10 +11,11 @@ export default function MessageInput({
   handleChangeInputText,
   handleSendMessage,
 }: MessageInputProps) {
+  const isDisabledToSend = inputText.trim() === '';
   const handleOnKeyDownSendMessage = (
     e: React.KeyboardEvent<HTMLInputElement>
   ) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === 'Enter' && !e.shiftKey && inputText.trim() !== '') {
       e.preventDefault();
       handleSendMessage();
     }
@@ -31,8 +32,9 @@ export default function MessageInput({
       />
       <button
         type='button'
-        className='bg-primary-5 flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-full'
+        className={`flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-full ${isDisabledToSend ? 'bg-primary-2' : 'bg-primary-5'}`}
         onClick={handleSendMessage}
+        disabled={isDisabledToSend}
       >
         <img src={SendIcon} alt='Send' />
       </button>
