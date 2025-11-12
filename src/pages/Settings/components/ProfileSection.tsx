@@ -1,6 +1,8 @@
+import type { UserDataType } from '@pages/ChatRoom/types/chat-room-type';
+
 // TODO: replace with real data
-const dummy = {
-  profileImg: 'https://placehold.co/100',
+const dummy: UserDataType = {
+  profileImage: 'https://placehold.co/100',
   name: '홍길동',
   email: 'hong@example.com',
 };
@@ -10,7 +12,7 @@ export default function ProfileSection() {
     <div className='border-grayscale-3 flex flex-col items-center gap-[1.2rem] border-b p-[2rem]'>
       <img
         className='w-[10rem] rounded-full'
-        src={dummy.profileImg ?? 'https://placehold.co/100'}
+        src={dummy.profileImage ?? 'https://placehold.co/100'}
         alt='Profile Image'
       />
       <div className='flex flex-col items-center gap-[0.8rem]'>
