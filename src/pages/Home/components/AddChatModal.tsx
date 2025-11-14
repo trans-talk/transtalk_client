@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import CloseIcon from '@assets/ui/close.svg';
 
 interface AddChatModalProps {
@@ -6,6 +7,8 @@ interface AddChatModalProps {
 }
 
 export default function AddChatModal({ handleCloseModal }: AddChatModalProps) {
+  const { t } = useTranslation();
+
   const [inputEmail, setInputEmail] = useState('');
   const [targetLanguage, setTargetLanguage] = useState('');
 
@@ -37,9 +40,9 @@ export default function AddChatModal({ handleCloseModal }: AddChatModalProps) {
           <img src={CloseIcon} alt='Close' />
         </button>
         <div className='flex flex-col items-center gap-[1rem]'>
-          <h2 className='header-16'>New Chat</h2>
+          <h2 className='header-16'>{t('addChat.title')}</h2>
           <span className='body-14 text-grayscale-4 text-center whitespace-pre-line'>
-            {`채팅할 사용자의 e-mail address를 입력하고\n함께 대화할 언어를 선택해주세요.`}
+            {t('addChat.description')}
           </span>
         </div>
         <div className='flex w-full flex-col gap-[1.2rem]'>
@@ -48,7 +51,7 @@ export default function AddChatModal({ handleCloseModal }: AddChatModalProps) {
             type='email'
             value={inputEmail}
             onChange={e => handleChangeInputEmail(e)}
-            placeholder='사용자 e-mail 입력'
+            placeholder={t('addChat.email')}
           />
           <select
             className={`bg-grayscale-2 body-16 appearance-none rounded-[1rem] px-[1.5rem] py-[0.6rem] outline-none ${!targetLanguage ? 'text-grayscale-5' : 'text-black'} `}
@@ -56,13 +59,13 @@ export default function AddChatModal({ handleCloseModal }: AddChatModalProps) {
             onChange={e => handleChangeTargetLanguage(e)}
           >
             <option value='' disabled className='text-grayscale-5'>
-              번역 언어
+              {t('addChat.targetLanguage')}
             </option>
-            <option value='ko'>Korean</option>
-            <option value='en'>English</option>
-            <option value='ja'>Japanese</option>
-            <option value='zh'>Chinese</option>
-            <option value='es'>Spanish</option>
+            <option value='ko'>{t('addChat.languageList.ko')}</option>
+            <option value='en'>{t('addChat.languageList.en')}</option>
+            <option value='ja'>{t('addChat.languageList.ja')}</option>
+            <option value='zh'>{t('addChat.languageList.zh')}</option>
+            <option value='es'>{t('addChat.languageList.es')}</option>
           </select>
         </div>
         <button
@@ -75,7 +78,7 @@ export default function AddChatModal({ handleCloseModal }: AddChatModalProps) {
               : 'bg-primary-5 hover:bg-primary-7'
           }`}
         >
-          채팅 시작하기
+          {t('addChat.button')}
         </button>
       </div>
     </div>

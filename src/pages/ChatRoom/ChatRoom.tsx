@@ -34,19 +34,26 @@ export default function ChatRoom() {
   };
 
   useEffect(() => {
-    const timer = requestAnimationFrame(() => {
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: 'instant',
-      });
-    });
-
     // TODO : connect api.
     setUserData(dummyChatRoom.user);
     setMessageList(dummyChatRoom.messageList);
+  }, []);
+
+  useEffect(() => {
+    if (!messageList) return;
+
+    const timer = requestAnimationFrame(() => {
+      const scrollHeight =
+        document.documentElement.scrollHeight || document.body.scrollHeight;
+
+      window.scrollTo({
+        top: scrollHeight,
+        behavior: 'auto',
+      });
+    });
 
     return () => cancelAnimationFrame(timer);
-  }, []);
+  }, [messageList]);
 
   return (
     <div className='bg-grayscale-1 min-h-dvh pt-[7rem]'>

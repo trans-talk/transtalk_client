@@ -1,10 +1,12 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { ROUTES } from '@router/routes';
 import GoogleLogo from '@assets/logo/google-logo.svg';
 
 export default function LoginButton() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   // TODO: Social Login API integration
   const handleLogin = () => {
@@ -18,7 +20,7 @@ export default function LoginButton() {
       onClick={handleLogin}
     >
       <img className='h-[2rem] w-[2rem]' src={GoogleLogo} alt='Google Logo' />
-      <span className='body-14'>Sign With Google</span>
+      <span className='body-14'>{t('login.button')}</span>
     </button>
   );
 }

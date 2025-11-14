@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import CloseIcon from '@assets/ui/close.svg';
 
 interface SearchBarProps {
@@ -11,6 +12,7 @@ export default function SearchBar({
   handleChangeValue,
   handleCloseSearchMode,
 }: SearchBarProps) {
+  const { t } = useTranslation();
   return (
     <div className='border-grayscale-3 fixed top-[0] z-50 flex w-full max-w-[60rem] flex-row items-center gap-[1.5rem] border-b bg-white px-[1.5rem] py-[1rem]'>
       <input
@@ -18,7 +20,7 @@ export default function SearchBar({
         type='search'
         value={value}
         onChange={handleChangeValue}
-        placeholder='검색어를 입력하세요..'
+        placeholder={t('home.search')}
       />
 
       <button

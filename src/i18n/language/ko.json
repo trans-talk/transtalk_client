@@ -1,0 +1,35 @@
+{
+  "login": {
+    "description": "메시지를 보내면 자동으로 번역됩니다.",
+    "welcome": "로그인하여 TransTalk을 시작하세요!",
+    "button": "Google 로그인"
+  },
+  "settings": {
+    "header": "설정",
+    "logout": "로그아웃",
+    "withdraw": "회원탈퇴"
+  },
+  "home": {
+    "header": "채팅",
+    "search": "검색어를 입력하세요..",
+    "empty": "채팅 내역이 없습니다.\n채팅방을 만들어 대화를 나누어 보세요!"
+  },
+  "addChat": {
+    "title": "새 채팅",
+    "description": "채팅할 사용자의 e-mail 주소를 입력하고\n함께 대화할 언어를 선택해주세요.",
+    "email": "사용자 e-mail 입력",
+    "targetLanguage": "번역 언어",
+    "languageList": {
+      "ko": "한국어",
+      "en": "영어",
+      "ja": "일본어",
+      "zh": "중국어",
+      "es": "스페인어"
+    },
+    "button": "채팅 시작하기"
+  },
+  "chatRoom": {
+    "input": "메시지를 입력하세요..",
+    "empty": "채팅을 시작하세요!"
+  }
+}

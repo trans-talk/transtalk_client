@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import SendIcon from '@assets/ui/send.svg';
 
 interface MessageInputProps {
@@ -11,6 +12,8 @@ export default function MessageInput({
   handleChangeInputText,
   handleSendMessage,
 }: MessageInputProps) {
+  const { t } = useTranslation();
+
   const isDisabledToSend = inputText.trim() === '';
   const handleOnKeyDownSendMessage = (
     e: React.KeyboardEvent<HTMLInputElement>
@@ -28,7 +31,7 @@ export default function MessageInput({
         value={inputText}
         onChange={handleChangeInputText}
         onKeyDown={handleOnKeyDownSendMessage}
-        placeholder='메시지를 입력하세요..'
+        placeholder={t('chatRoom.input')}
       />
       <button
         type='button'

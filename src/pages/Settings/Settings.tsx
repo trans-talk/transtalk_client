@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import ArrowLeft from '@assets/ui/arrow-left.svg';
 import Header from '@components/Header';
@@ -9,6 +10,8 @@ import AppFooter from '@pages/Settings/components/AppFooter';
 
 export default function Settings() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
   const handleGoBack = () => {
     navigate(-1);
   };
@@ -25,7 +28,7 @@ export default function Settings() {
           </button>
         }
       >
-        <h1 className='header-20'>Settings</h1>
+        <h1 className='header-20'>{t('settings.header')}</h1>
       </Header>
       <ProfileSection />
       <SettingContentSection />
