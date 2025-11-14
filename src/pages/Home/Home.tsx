@@ -1,11 +1,12 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import SearchIcon from '@assets/ui/search.svg';
 import SettingIcon from '@assets/ui/setting.svg';
 import Header from '@components/Header';
 import { ROUTES } from '@router/routes';
 import FloatingAddChatButton from '@pages/Home/components/FloatingAddChatButton';
-import { useEffect, useState } from 'react';
 import AddChatModal from '@pages/Home/components/AddChatModal';
 import FloatingScrollButton from '@components/FloatingScrollButton';
 import { dummyChatList } from '@pages/Home/dummy-chat-list';
@@ -15,6 +16,8 @@ import ChatList from '@pages/Home/components/ChatList';
 
 export default function Home() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [chatList, setChatList] = useState<ChatItemType[] | null>(null);
   const [searchText, setSearchText] = useState('');
@@ -41,7 +44,7 @@ export default function Home() {
   };
   useEffect(() => {
     const timer = requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      window.scrollTo({ top: 0, behavior: 'auto' });
     });
 
     // TODO : connect api. get chat list with search text or none.
@@ -83,7 +86,7 @@ export default function Home() {
             </div>
           }
         >
-          <h1 className='header-20'>Chats</h1>
+          <h1 className='header-20'>{t('home.header')}</h1>
         </Header>
       )}
 

@@ -1,0 +1,35 @@
+{
+  "login": {
+    "description": "Messages you send will be translated automatically.",
+    "welcome": "Login to start using TransTalk!",
+    "button": "Sign in with Google"
+  },
+  "settings": {
+    "header": "Settings",
+    "logout": "Log out",
+    "withdraw": "Delete account"
+  },
+  "home": {
+    "header": "Chats",
+    "search": "Type a search text..",
+    "empty": "You have no chat history.\nCreate a chat room and start a conversation!"
+  },
+  "addChat": {
+    "title": "New chat",
+    "description": "Enter the email address of the person you want to chat with\nand choose the language for translation..",
+    "email": "Enter user email",
+    "targetLanguage": "Target language",
+    "languageList": {
+      "ko": "Korean",
+      "en": "English",
+      "ja": "Japanese",
+      "zh": "Chinese",
+      "es": "Spanish"
+    },
+    "button": "Start chat"
+  },
+  "chatRoom": {
+    "input": "Type a message...",
+    "empty": "Start the conversation!"
+  }
+}

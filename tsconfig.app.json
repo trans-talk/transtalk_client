@@ -36,6 +36,7 @@
       "@constant/*": ["./src/constant/*"],
       "@styles/*": ["./src/styles/*"],
       "@router/*": ["./src/router/*"],
+      "@i18n/*": ["./src/i18n/*"],
       "@/*": ["src/*"]
     }
   },

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import MessageItem from '@pages/ChatRoom/components/MessageItem';
 import type { MessageType } from '@pages/ChatRoom/types/chat-room-type';
 
@@ -6,6 +7,8 @@ interface MessageListProps {
 }
 
 export default function MessageList({ messageList }: MessageListProps) {
+  const { t } = useTranslation();
+
   return (
     <>
       {messageList.length !== 0 ? (
@@ -16,7 +19,9 @@ export default function MessageList({ messageList }: MessageListProps) {
         </div>
       ) : (
         <div className='mt-[2rem] flex w-full justify-center'>
-          <span className='body-14 text-grayscale-4'>채팅을 시작하세요!</span>
+          <span className='body-14 text-grayscale-4'>
+            {t('chatRoom.empty')}
+          </span>
         </div>
       )}
     </>
