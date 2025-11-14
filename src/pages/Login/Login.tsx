@@ -14,7 +14,7 @@ export default function Login() {
           alt='TransTalk Logo'
         />
         <h1 className='header-20'>TransTalk</h1>
-        <span className='body-16'>{t('login.description')}</span>
+        <span className='body-14'>{t('login.description')}</span>
       </div>
       <LoginButton />
       <span className='body-14 text-grayscale-4'>{t('login.welcome')}</span>
