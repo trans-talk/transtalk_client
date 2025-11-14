@@ -10,4 +10,5 @@ export interface MessageType {
   target: string;
   isUser: boolean;
   chatTime: string;
+  isUnread: boolean;
 }

@@ -11,6 +11,7 @@ export const dummyChatRoom = {
       target: 'Hello! How are you?',
       isUser: false,
       chatTime: '14:30',
+      isUnread: false,
     },
     {
       chatId: 2,
@@ -18,6 +19,7 @@ export const dummyChatRoom = {
       target: 'Hello! How are you?',
       isUser: true,
       chatTime: '14:31',
+      isUnread: false,
     },
     {
       chatId: 3,
@@ -25,6 +27,7 @@ export const dummyChatRoom = {
       target: 'Hello! How are you?',
       isUser: false,
       chatTime: '14:32',
+      isUnread: false,
     },
     {
       chatId: 4,
@@ -32,6 +35,7 @@ export const dummyChatRoom = {
       target: 'Hello! How are you?',
       isUser: true,
       chatTime: '14:33',
+      isUnread: false,
     },
     {
       chatId: 5,
@@ -39,6 +43,7 @@ export const dummyChatRoom = {
       target: 'Hello! How are you?',
       isUser: false,
       chatTime: '14:30',
+      isUnread: false,
     },
     {
       chatId: 6,
@@ -46,6 +51,7 @@ export const dummyChatRoom = {
       target: 'Hello! How are you?',
       isUser: true,
       chatTime: '14:31',
+      isUnread: false,
     },
     {
       chatId: 7,
@@ -53,6 +59,7 @@ export const dummyChatRoom = {
       target: 'Hello! How are you?',
       isUser: false,
       chatTime: '14:32',
+      isUnread: false,
     },
     {
       chatId: 8,
@@ -60,6 +67,7 @@ export const dummyChatRoom = {
       target: 'Hello! How are you?',
       isUser: true,
       chatTime: '14:33',
+      isUnread: true,
     },
   ],
 };
