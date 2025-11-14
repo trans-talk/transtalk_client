@@ -4,9 +4,9 @@ import axios, {
   type AxiosResponse,
   type InternalAxiosRequestConfig,
 } from 'axios';
-import { tokenStorage } from '@utils/token';
+
 import { reissueAccessToken } from '@api/reissueAccessToken';
-import { applyAuthorizationHeader } from '@api/applyAuthorizationHeader';
+import { applyAuthorizationHeader, tokenStorage } from '@utils/token';
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
