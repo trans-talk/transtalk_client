@@ -25,7 +25,7 @@ export default function MessageItem({ message }: MessageItemProps) {
       <div
         className={`flex w-full flex-row items-end gap-[1rem] ${isUser && 'justify-end'}`}
       >
-        {isUnread && (
+        {isUser && isUnread && (
           <span className='caption-10 text-primary-5 py-[0.3rem]'>1</span>
         )}
         <div className={translatedMessageStyle}>{target}</div>
