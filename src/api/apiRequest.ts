@@ -78,7 +78,7 @@ apiClient.interceptors.response.use(
     };
 
     // TODO : change status
-    if (status !== 408) {
+    if (status !== 401) {
       return Promise.reject(error);
     }
 
