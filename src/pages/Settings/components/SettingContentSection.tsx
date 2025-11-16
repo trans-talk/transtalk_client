@@ -1,13 +1,19 @@
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+
 import LogoutIcon from '@assets/ui/logout.svg';
 import WithdrawIcon from '@assets/ui/withdraw.svg';
+import { tokenStorage } from '@utils/token';
+import { ROUTES } from '@router/routes';
 
 export default function SettingContentSection() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   // TODO: add logout and withdraw handler logic
   const handleLogout = () => {
-    alert('logout');
+    tokenStorage.clearTokens();
+    navigate(ROUTES.LOGIN);
   };
   const handleWithdraw = () => {
     alert('withdraw');
