@@ -81,8 +81,7 @@ apiClient.interceptors.response.use(
       _retry?: boolean;
     };
 
-    // TODO : change status
-    if (status !== 406) {
+    if (status !== 401) {
       return Promise.reject(error);
     }
 

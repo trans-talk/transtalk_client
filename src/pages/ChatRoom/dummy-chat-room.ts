@@ -1,6 +1,7 @@
 export const dummyChatRoom = {
   user: {
-    profileImage: 'https://placehold.co/50',
+    id: 1,
+    picture: 'https://placehold.co/50',
     name: 'Sarah Johnson',
     email: 'example@gmail.com',
   },

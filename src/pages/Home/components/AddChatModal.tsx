@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import CloseIcon from '@assets/ui/close.svg';
+import useCreateNewChat from '@pages/Home/hooks/use-create-new-chat';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '@router/routes';
 
 interface AddChatModalProps {
   handleCloseModal: () => void;
@@ -9,6 +12,7 @@ interface AddChatModalProps {
 
 export default function AddChatModal({ handleCloseModal }: AddChatModalProps) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const [inputEmail, setInputEmail] = useState('');
   const [targetLanguage, setTargetLanguage] = useState('');
@@ -24,10 +28,9 @@ export default function AddChatModal({ handleCloseModal }: AddChatModalProps) {
     setTargetLanguage(e.target.value);
   };
 
-  // TODO: add create chat logic, connect api
   const handleStartChat = () => {
-    alert(`${inputEmail}, ${targetLanguage}`);
-    // navigate(created chat room)
+    const { newChatRoomId } = useCreateNewChat(targetLanguage, inputEmail);
+    navigate(ROUTES.CHAT_ROOM + newChatRoomId);
   };
 
   return (

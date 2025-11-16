@@ -30,5 +30,7 @@ export const loginApi = async (code: string) => {
     params: { code },
   });
 
+  console.log(response);
+
   return response.data;
 };

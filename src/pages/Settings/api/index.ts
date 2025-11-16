@@ -9,11 +9,9 @@ interface GetUserDataResponse extends BaseResponse {
 
 export const getUserDataApi = async () => {
   const response = await apiRequest<GetUserDataResponse>({
-    endpoint: '/auth/me',
+    endpoint: '/me',
     method: 'GET',
   });
-
-  console.log(response);
 
   return response.data;
 };
