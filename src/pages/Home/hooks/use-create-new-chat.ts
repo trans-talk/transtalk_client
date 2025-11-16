@@ -11,11 +11,11 @@ export default function useCreateNewChat(
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const { mutate: handleCreateNewChat, data } = useMutation({
+  const { mutate: handleCreateNewChat } = useMutation({
     mutationFn: () => createNewChatRoom(language, recipientEmail),
-    onSuccess: () => {
+    onSuccess: response => {
       queryClient.invalidateQueries({ queryKey: CHAT_ROOM_LIST_QUERY_KEY.ALL });
-      navigate(ROUTES.CHAT_ROOM + data?.chatRoomId);
+      navigate(`${ROUTES.CHAT_ROOM}/${response.chatRoomId}`);
     },
     onError: (error: Error) => {
       alert(error.message);

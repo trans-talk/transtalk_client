@@ -20,7 +20,6 @@ export default function ChatItem({ chat }: ChatItemProps) {
     unreadMessageCount,
   } = chat;
 
-  // TODO : update navigate logic
   const handleToChatRoom = () => {
     navigate(`${ROUTES.CHAT_ROOM}/${chatroomId}`);
   };
@@ -37,7 +36,7 @@ export default function ChatItem({ chat }: ChatItemProps) {
           src={recipientPicture ?? 'https://placehold.co/50'}
           alt='Profile Image'
         />
-        <div className='flex w-full flex-col gap-[0.5rem]'>
+        <div className='flex flex-1 flex-col gap-[0.5rem]'>
           <div className='flex flex-row items-center justify-between'>
             <div className='flex flex-row items-center gap-[0.8rem]'>
               <span className='title-16'>{recipientName}</span>
