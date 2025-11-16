@@ -24,6 +24,21 @@ export default function ChatItem({ chat }: ChatItemProps) {
     navigate(`${ROUTES.CHAT_ROOM}/${chatroomId}`);
   };
 
+  const formatLanguage = (language: string) => {
+    switch (language) {
+      case 'ko':
+        return 'Korean';
+      case 'en-us':
+        return 'English';
+      case 'ja':
+        return 'Japanese';
+      case 'zh':
+        return 'Chinese';
+      case 'es':
+        return 'Spanish';
+    }
+  };
+
   return (
     <button
       className='border-grayscale-3 flex flex-row items-start border-b p-[2rem]'
@@ -41,7 +56,7 @@ export default function ChatItem({ chat }: ChatItemProps) {
             <div className='flex flex-row items-center gap-[0.8rem]'>
               <span className='title-16'>{recipientName}</span>
               <div className='caption-10 bg-primary-3 flex items-center rounded-[0.8rem] px-[1.3rem] py-[0.3rem] text-white'>
-                {selectedLanguage}
+                {formatLanguage(selectedLanguage)}
               </div>
             </div>
             <span className='body-14 text-grayscale-4'>
