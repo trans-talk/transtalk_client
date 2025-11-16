@@ -46,5 +46,9 @@ export const createNewChatRoom = async (
     },
   });
 
+  if (!response.success && response.message) {
+    throw Error(response.message);
+  }
+
   return response.data;
 };

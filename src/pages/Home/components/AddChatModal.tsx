@@ -3,8 +3,6 @@ import { useTranslation } from 'react-i18next';
 
 import CloseIcon from '@assets/ui/close.svg';
 import useCreateNewChat from '@pages/Home/hooks/use-create-new-chat';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '@router/routes';
 
 interface AddChatModalProps {
   handleCloseModal: () => void;
@@ -12,7 +10,6 @@ interface AddChatModalProps {
 
 export default function AddChatModal({ handleCloseModal }: AddChatModalProps) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   const [inputEmail, setInputEmail] = useState('');
   const [targetLanguage, setTargetLanguage] = useState('');
@@ -27,11 +24,7 @@ export default function AddChatModal({ handleCloseModal }: AddChatModalProps) {
   ) => {
     setTargetLanguage(e.target.value);
   };
-
-  const handleStartChat = () => {
-    const { newChatRoomId } = useCreateNewChat(targetLanguage, inputEmail);
-    navigate(ROUTES.CHAT_ROOM + newChatRoomId);
-  };
+  const { handleCreateNewChat } = useCreateNewChat(targetLanguage, inputEmail);
 
   return (
     <div className='fixed top-[0] left-1/2 z-50 h-[100dvh] w-full max-w-[60rem] -translate-x-1/2 bg-black/50'>
@@ -74,7 +67,7 @@ export default function AddChatModal({ handleCloseModal }: AddChatModalProps) {
         </div>
         <button
           type='button'
-          onClick={handleStartChat}
+          onClick={() => handleCreateNewChat()}
           disabled={isDisabled}
           className={`body-16 rounded-[1rem] px-[1.5rem] py-[0.8rem] text-white transition-all ${
             isDisabled
