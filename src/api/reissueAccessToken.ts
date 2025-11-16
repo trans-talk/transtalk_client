@@ -5,8 +5,7 @@ import axios from 'axios';
 export async function reissueAccessToken(): Promise<string | null> {
   try {
     const response = await axios.post(
-      // TODO : change reissue endpoint
-      `${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/refresh`,
+      `${import.meta.env.VITE_API_BASE_URL}/auth/refresh`,
       {},
       {
         withCredentials: true,

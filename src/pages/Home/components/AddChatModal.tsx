@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import CloseIcon from '@assets/ui/close.svg';
 
 interface AddChatModalProps {
@@ -62,7 +63,7 @@ export default function AddChatModal({ handleCloseModal }: AddChatModalProps) {
               {t('addChat.targetLanguage')}
             </option>
             <option value='ko'>{t('addChat.languageList.ko')}</option>
-            <option value='en'>{t('addChat.languageList.en')}</option>
+            <option value='en-us'>{t('addChat.languageList.en')}</option>
             <option value='ja'>{t('addChat.languageList.ja')}</option>
             <option value='zh'>{t('addChat.languageList.zh')}</option>
             <option value='es'>{t('addChat.languageList.es')}</option>

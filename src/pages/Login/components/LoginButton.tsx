@@ -1,16 +1,27 @@
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { ROUTES } from '@router/routes';
 import GoogleLogo from '@assets/logo/google-logo.svg';
+import useLogin from '@pages/Login/hooks/use-login';
 
 export default function LoginButton() {
-  const navigate = useNavigate();
   const { t } = useTranslation();
 
-  // TODO: Social Login API integration
-  const handleLogin = () => {
-    navigate(ROUTES.HOME);
+  const { handleAuthorizationCode } = useLogin();
+
+  const handleLogin = async () => {
+    try {
+      const response = await handleAuthorizationCode();
+      const redirectUrl = response.data;
+
+      if (!redirectUrl) {
+        console.error('Empty redirect URL from /auth');
+        return;
+      }
+
+      window.location.href = redirectUrl;
+    } catch (e) {
+      console.error('Login error', e);
+    }
   };
 
   return (
