@@ -11,6 +11,7 @@ export default function LoginButton() {
   const handleLogin = async () => {
     try {
       const response = await handleAuthorizationCode();
+      console.log('redirect url :', response);
       const redirectUrl = response.data;
 
       if (!redirectUrl) {
