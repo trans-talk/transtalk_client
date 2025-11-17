@@ -1,11 +1,8 @@
 import useSettings from '@pages/Settings/hooks/use-settings';
 
 export default function ProfileSection() {
-  const { userData, isError, error } = useSettings();
+  const { userData } = useSettings();
 
-  if (isError) {
-    console.error(error);
-  }
   return (
     <div className='border-grayscale-3 flex flex-col items-center gap-[1.2rem] border-b p-[2rem]'>
       <img

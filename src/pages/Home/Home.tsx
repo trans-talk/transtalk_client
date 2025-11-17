@@ -71,14 +71,15 @@ export default function Home() {
       ) : (
         <ChatList chatList={chatList} />
       )}
-      <div ref={listBottomRef} className='h-[0.1rem] w-full' />
-      {isFetchingNextPage && (
-        <div className='text-grayscale-4 body-14 text-center'>Loading...</div>
-      )}
 
       {isModalOpen && <AddChatModal handleCloseModal={handleCloseModal} />}
       <FloatingAddChatButton handleOpenModal={handleOpenModal} />
       <FloatingScrollButton />
+
+      <div ref={listBottomRef} className='h-[0.1rem] w-full' />
+      {isFetchingNextPage && (
+        <div className='text-grayscale-4 body-14 text-center'>Loading...</div>
+      )}
     </div>
   );
 }

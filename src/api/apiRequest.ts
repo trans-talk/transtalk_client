@@ -28,7 +28,7 @@ export const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    if (config.url === '/auth' || config.url === '/auth/token') {
+    if (config.url?.startsWith('/auth')) {
       return config;
     }
 
