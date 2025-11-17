@@ -2,7 +2,7 @@ import { Client, type IFrame } from '@stomp/stompjs';
 import { tokenStorage } from '@utils/token';
 import SockJS from 'sockjs-client';
 
-const WS_URL = import.meta.env.VITE_WS_URL;
+const WS_URL = import.meta.env.VITE_WS_URL.replace(/^wss:\/\//, 'https://');
 
 export const stompClient = new Client({
   webSocketFactory: () => new SockJS(WS_URL),
