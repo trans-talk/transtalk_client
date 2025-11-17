@@ -46,8 +46,8 @@ export const createNewChatRoom = async (
     },
   });
 
-  if (!response.success && response.message) {
-    throw Error(response.message);
+  if (!response.success) {
+    throw new Error(response.message ?? 'Failed to refresh access token');
   }
 
   return response.data;

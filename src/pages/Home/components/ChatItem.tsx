@@ -24,7 +24,7 @@ export default function ChatItem({ chat }: ChatItemProps) {
     navigate(`${ROUTES.CHAT_ROOM}/${chatroomId}`);
   };
 
-  const formatLanguage = (language: string) => {
+  const formatLanguage = (language: string): string => {
     switch (language) {
       case 'ko':
         return 'Korean';
@@ -36,6 +36,8 @@ export default function ChatItem({ chat }: ChatItemProps) {
         return 'Chinese';
       case 'es':
         return 'Spanish';
+      default:
+        return language;
     }
   };
 
