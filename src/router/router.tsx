@@ -16,10 +16,7 @@ export const router = createBrowserRouter([
         path: ROUTES.HOME,
         element: <Home />,
       },
-      {
-        path: ROUTES.LOGIN,
-        element: <Login />,
-      },
+
       {
         path: ROUTES.CALL_BACK,
         element: <GoogleCallback />,
@@ -30,5 +27,9 @@ export const router = createBrowserRouter([
         element: <Settings />,
       },
     ],
+  },
+  {
+    path: ROUTES.LOGIN,
+    element: <Login />,
   },
 ]);
