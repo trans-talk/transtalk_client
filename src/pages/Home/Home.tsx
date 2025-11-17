@@ -10,9 +10,12 @@ import SearchBar from '@pages/Home/components/SearchBar';
 import ChatList from '@pages/Home/components/ChatList';
 import { useChatRoomListQuery } from '@pages/Home/hooks/use-chat-room-list-query';
 import useChatRoomListState from '@pages/Home/hooks/use-chat-room-list-state';
+import useSubscribeChatRoomList from '@pages/Home/hooks/use-subscribe-chat-room-list';
 
 export default function Home() {
   const { t } = useTranslation();
+
+  useSubscribeChatRoomList();
 
   const { listBottomRef, chatList, isPendingChatRoomList, isFetchingNextPage } =
     useChatRoomListQuery();

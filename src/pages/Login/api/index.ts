@@ -7,13 +7,10 @@ interface AuthorizationCodeResponse extends BaseResponse {
 }
 
 export const getAuthorizationCode = async () => {
-  const response = await apiRequest<AuthorizationCodeResponse>({
+  return await apiRequest<AuthorizationCodeResponse>({
     endpoint: '/auth',
     method: 'GET',
   });
-  console.log('api 호출 결과1 : ', response);
-  console.log('api 호출 결과2 : ', response.data);
-  return response;
 };
 
 interface LoginResponse extends BaseResponse {

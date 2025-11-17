@@ -17,7 +17,6 @@ export default function GoogleCallback() {
 
     const params = new URLSearchParams(location.search);
     const code = params.get('code');
-    console.log(code);
 
     if (!code) {
       console.error('Authorization code not found');
