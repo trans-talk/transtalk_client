@@ -6,6 +6,7 @@ import Home from '@pages/Home/Home';
 import Login from '@pages/Login/Login';
 import Settings from '@pages/Settings/Settings';
 import ChatRoom from '@pages/ChatRoom/ChatRoom';
+import GoogleCallback from '@pages/Login/GoogleCallback';
 
 export const router = createBrowserRouter([
   {
@@ -15,9 +16,10 @@ export const router = createBrowserRouter([
         path: ROUTES.HOME,
         element: <Home />,
       },
+
       {
-        path: ROUTES.LOGIN,
-        element: <Login />,
+        path: ROUTES.CALL_BACK,
+        element: <GoogleCallback />,
       },
       { path: ROUTES.CHAT_ROOM + '/:chatRoomId', element: <ChatRoom /> },
       {
@@ -25,5 +27,9 @@ export const router = createBrowserRouter([
         element: <Settings />,
       },
     ],
+  },
+  {
+    path: ROUTES.LOGIN,
+    element: <Login />,
   },
 ]);

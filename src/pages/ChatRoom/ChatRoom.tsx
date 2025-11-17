@@ -5,13 +5,12 @@ import ArrowLeft from '@assets/ui/arrow-left.svg';
 import Header from '@components/Header';
 import ChatPartnerProfile from '@pages/ChatRoom/components/ChatPartnerProfile';
 import { dummyChatRoom } from '@pages/ChatRoom/dummy-chat-room';
-import type {
-  MessageType,
-  UserDataType,
-} from '@pages/ChatRoom/types/chat-room-type';
+
 import MessageInput from '@pages/ChatRoom/components/MessageInput';
 import MessageList from '@pages/ChatRoom/components/MessageList';
 import FloatingScrollButton from '@components/FloatingScrollButton';
+import type { UserDataType } from '@type/user';
+import type { MessageType } from '@type/message';
 
 export default function ChatRoom() {
   const navigate = useNavigate();
@@ -70,9 +69,10 @@ export default function ChatRoom() {
       >
         {userData && (
           <ChatPartnerProfile
-            profileImage={userData?.profileImage}
-            name={userData?.name}
-            email={userData?.email}
+            id={userData.id}
+            picture={userData.picture}
+            name={userData.name}
+            email={userData.email}
           />
         )}
       </Header>

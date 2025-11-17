@@ -1,32 +1,42 @@
 import { ROUTES } from '@router/routes';
+import type { ChatRoomType } from '@type/room';
 import { useNavigate } from 'react-router-dom';
 
-export interface ChatItemType {
-  chatId: number;
-  profileImage: string;
-  name: string;
-  originalMessage: string;
-  translatedMessage: string;
-  language: string;
-  recentChatTime: string;
-  unreadChatCount: number;
+interface ChatItemProps {
+  chat: ChatRoomType;
 }
 
-export default function ChatItem({
-  chatId,
-  profileImage,
-  name,
-  originalMessage,
-  translatedMessage,
-  language,
-  recentChatTime,
-  unreadChatCount,
-}: ChatItemType) {
+export default function ChatItem({ chat }: ChatItemProps) {
   const navigate = useNavigate();
 
-  // TODO : update navigate logic
+  const {
+    chatroomId,
+    recipientPicture,
+    recipientName,
+    originalRecentMessage,
+    translatedRecentMessage,
+    selectedLanguage,
+    recentMessageTime,
+    unreadMessageCount,
+  } = chat;
+
   const handleToChatRoom = () => {
-    navigate(`${ROUTES.CHAT_ROOM}/${chatId}`);
+    navigate(`${ROUTES.CHAT_ROOM}/${chatroomId}`);
+  };
+
+  const formatLanguage = (language: string) => {
+    switch (language) {
+      case 'ko':
+        return 'Korean';
+      case 'en-us':
+        return 'English';
+      case 'ja':
+        return 'Japanese';
+      case 'zh':
+        return 'Chinese';
+      case 'es':
+        return 'Spanish';
+    }
   };
 
   return (
@@ -38,29 +48,31 @@ export default function ChatItem({
       <div className='flex w-full flex-row gap-[1.4rem]'>
         <img
           className='h-[6rem] w-[6rem] rounded-full'
-          src={profileImage ?? 'https://placehold.co/50'}
+          src={recipientPicture ?? 'https://placehold.co/50'}
           alt='Profile Image'
         />
-        <div className='flex w-full flex-col gap-[0.5rem]'>
+        <div className='flex flex-1 flex-col gap-[0.5rem]'>
           <div className='flex flex-row items-center justify-between'>
             <div className='flex flex-row items-center gap-[0.8rem]'>
-              <span className='title-16'>{name}</span>
+              <span className='title-16'>{recipientName}</span>
               <div className='caption-10 bg-primary-3 flex items-center rounded-[0.8rem] px-[1.3rem] py-[0.3rem] text-white'>
-                {language}
+                {formatLanguage(selectedLanguage)}
               </div>
             </div>
-            <span className='body-14 text-grayscale-4'>{recentChatTime}</span>
+            <span className='body-14 text-grayscale-4'>
+              {recentMessageTime}
+            </span>
           </div>
           <div className='flex flex-row items-center justify-between'>
             <div className='flex flex-col items-start'>
-              <span className='body-14'>{originalMessage}</span>
+              <span className='body-14'>{originalRecentMessage}</span>
               <span className='body-12 text-grayscale-4'>
-                {translatedMessage}
+                {translatedRecentMessage}
               </span>
             </div>
-            {unreadChatCount !== 0 && (
+            {unreadMessageCount !== 0 && (
               <div className='bg-primary-5 body-12 flex h-[2rem] w-[2rem] items-center justify-center rounded-full text-white'>
-                {unreadChatCount}
+                {unreadMessageCount}
               </div>
             )}
           </div>

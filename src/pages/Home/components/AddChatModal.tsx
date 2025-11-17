@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import CloseIcon from '@assets/ui/close.svg';
+import useCreateNewChat from '@pages/Home/hooks/use-create-new-chat';
 
 interface AddChatModalProps {
   handleCloseModal: () => void;
@@ -22,12 +24,7 @@ export default function AddChatModal({ handleCloseModal }: AddChatModalProps) {
   ) => {
     setTargetLanguage(e.target.value);
   };
-
-  // TODO: add create chat logic, connect api
-  const handleStartChat = () => {
-    alert(`${inputEmail}, ${targetLanguage}`);
-    // navigate(created chat room)
-  };
+  const { handleCreateNewChat } = useCreateNewChat(targetLanguage, inputEmail);
 
   return (
     <div className='fixed top-[0] left-1/2 z-50 h-[100dvh] w-full max-w-[60rem] -translate-x-1/2 bg-black/50'>
@@ -62,7 +59,7 @@ export default function AddChatModal({ handleCloseModal }: AddChatModalProps) {
               {t('addChat.targetLanguage')}
             </option>
             <option value='ko'>{t('addChat.languageList.ko')}</option>
-            <option value='en'>{t('addChat.languageList.en')}</option>
+            <option value='en-us'>{t('addChat.languageList.en')}</option>
             <option value='ja'>{t('addChat.languageList.ja')}</option>
             <option value='zh'>{t('addChat.languageList.zh')}</option>
             <option value='es'>{t('addChat.languageList.es')}</option>
@@ -70,7 +67,7 @@ export default function AddChatModal({ handleCloseModal }: AddChatModalProps) {
         </div>
         <button
           type='button'
-          onClick={handleStartChat}
+          onClick={() => handleCreateNewChat()}
           disabled={isDisabled}
           className={`body-16 rounded-[1rem] px-[1.5rem] py-[0.8rem] text-white transition-all ${
             isDisabled

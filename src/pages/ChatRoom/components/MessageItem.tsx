@@ -1,4 +1,4 @@
-import type { MessageType } from '@pages/ChatRoom/types/chat-room-type';
+import type { MessageType } from '@type/message';
 
 interface MessageItemProps {
   message: MessageType;

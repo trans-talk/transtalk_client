@@ -28,6 +28,10 @@ export const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
+    if (config.url?.startsWith('/auth')) {
+      return config;
+    }
+
     const token = tokenStorage.getAccessToken();
     if (!token) return config;
 
@@ -77,7 +81,6 @@ apiClient.interceptors.response.use(
       _retry?: boolean;
     };
 
-    // TODO : change status
     if (status !== 401) {
       return Promise.reject(error);
     }

@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import MessageItem from '@pages/ChatRoom/components/MessageItem';
-import type { MessageType } from '@pages/ChatRoom/types/chat-room-type';
+import type { MessageType } from '@type/message';
 
 interface MessageListProps {
   messageList: MessageType[];

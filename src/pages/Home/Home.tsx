@@ -1,62 +1,34 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import SearchIcon from '@assets/ui/search.svg';
 import SettingIcon from '@assets/ui/setting.svg';
 import Header from '@components/Header';
-import { ROUTES } from '@router/routes';
 import FloatingAddChatButton from '@pages/Home/components/FloatingAddChatButton';
 import AddChatModal from '@pages/Home/components/AddChatModal';
 import FloatingScrollButton from '@components/FloatingScrollButton';
-import { dummyChatList } from '@pages/Home/dummy-chat-list';
-import { type ChatItemType } from '@pages/Home/components/ChatItem';
 import SearchBar from '@pages/Home/components/SearchBar';
 import ChatList from '@pages/Home/components/ChatList';
+import { useChatRoomListQuery } from '@pages/Home/hooks/use-chat-room-list-query';
+import useChatRoomListState from '@pages/Home/hooks/use-chat-room-list-state';
 
 export default function Home() {
-  const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [chatList, setChatList] = useState<ChatItemType[] | null>(null);
-  const [searchText, setSearchText] = useState('');
-  const [isSearchMode, setIsSearchMode] = useState(false);
+  const { listBottomRef, chatList, isPendingChatRoomList, isFetchingNextPage } =
+    useChatRoomListQuery();
 
-  const handleChangeSearchText = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.target.value);
-  };
-  const handleOpenSearchMode = () => {
-    setIsSearchMode(true);
-  };
-  const handleCloseSearchMode = () => {
-    setSearchText('');
-    setIsSearchMode(false);
-  };
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-  const handleToSettingPage = () => {
-    navigate(ROUTES.SETTINGS);
-  };
-  useEffect(() => {
-    const timer = requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, behavior: 'auto' });
-    });
+  const {
+    isModalOpen,
+    searchText,
+    isSearchMode,
+    handleChangeSearchText,
+    handleOpenSearchMode,
+    handleCloseSearchMode,
+    handleOpenModal,
+    handleCloseModal,
+    handleToSettingPage,
+  } = useChatRoomListState();
 
-    // TODO : connect api. get chat list with search text or none.
-    setChatList(dummyChatList);
-
-    return () => cancelAnimationFrame(timer);
-  }, []);
-
-  useEffect(() => {
-    // TODO : connect api. get chat list with search text or none.
-    setChatList(dummyChatList);
-  }, [searchText]);
   return (
     <div className='pt-[7rem]'>
       {isSearchMode ? (
@@ -90,10 +62,24 @@ export default function Home() {
         </Header>
       )}
 
-      <ChatList chatList={chatList} />
+      {isPendingChatRoomList ? (
+        <div className='mt-[20rem] flex w-full items-center justify-center'>
+          <span className='text-grayscale-4 body-14 text-center'>
+            Loading...
+          </span>
+        </div>
+      ) : (
+        <ChatList chatList={chatList} />
+      )}
+
       {isModalOpen && <AddChatModal handleCloseModal={handleCloseModal} />}
       <FloatingAddChatButton handleOpenModal={handleOpenModal} />
       <FloatingScrollButton />
+
+      <div ref={listBottomRef} className='h-[0.1rem] w-full' />
+      {isFetchingNextPage && (
+        <div className='text-grayscale-4 body-14 text-center'>Loading...</div>
+      )}
     </div>
   );
 }

@@ -1,24 +1,36 @@
+import { apiRequest } from '@api/apiRequest';
+import { ROUTES } from '@router/routes';
+import type { BaseResponse } from '@type/response';
 import { tokenStorage } from '@utils/token';
-import axios from 'axios';
 
-// refresh API call
+interface ReissueResponse extends BaseResponse {
+  data: {
+    accessToken: string;
+    refreshToken: null;
+  };
+}
+
 export async function reissueAccessToken(): Promise<string | null> {
   try {
-    const response = await axios.post(
-      // TODO : change reissue endpoint
-      `${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/refresh`,
-      {},
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await apiRequest<ReissueResponse>({
+      endpoint: '/auth/refresh',
+      method: 'GET',
+    });
 
-    const newAccessToken: string | undefined = response.data?.accessToken;
+    if (!response.success && response.message) {
+      throw Error(response.message);
+    }
+
+    const newAccessToken: string | undefined = response.data.accessToken;
 
     if (newAccessToken) tokenStorage.setAccessToken(newAccessToken);
-
     return newAccessToken ?? null;
   } catch (err) {
+    console.error(err);
+
+    tokenStorage.clearTokens();
+    window.location.replace(ROUTES.LOGIN);
+
     return null;
   }
 }
