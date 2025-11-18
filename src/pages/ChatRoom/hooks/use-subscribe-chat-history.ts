@@ -13,9 +13,6 @@ export default function useSubscribeChatHistory(chatRoomId: string) {
 
   const queryClient = useQueryClient();
 
-  if (!chatRoomId) {
-  }
-
   const sendMessage = (content: string) => {
     if (!stompClient.connected) {
       console.warn('STOMP not connected. Message not sent.');
