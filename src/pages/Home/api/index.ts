@@ -2,15 +2,17 @@ import { apiRequest } from '@api/apiRequest';
 import type { BaseResponse } from '@type/response';
 import type { ChatRoomType } from '@type/room';
 
+export interface ChatRoomListData {
+  rooms: ChatRoomType[];
+  pageNumber: number;
+  pageSize: number;
+  hasNext: boolean;
+  isLast: boolean;
+  totalElements: number;
+}
+
 interface GetChatRoomResponse extends BaseResponse {
-  data: {
-    rooms: ChatRoomType[];
-    pageNumber: number;
-    pageSize: number;
-    hasNext: boolean;
-    isLast: boolean;
-    totalElements: number;
-  };
+  data: ChatRoomListData;
 }
 
 export const getChatRoomListApi = async (page: number) => {

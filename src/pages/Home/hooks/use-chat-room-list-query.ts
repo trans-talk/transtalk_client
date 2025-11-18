@@ -2,7 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
 import { CHAT_ROOM_LIST_QUERY_KEY } from '@/querykey/chat-room-list';
-import { getChatRoomListApi } from '@pages/Home/api';
+import { getChatRoomListApi, type ChatRoomListData } from '@pages/Home/api';
 
 export function useChatRoomListQuery() {
   const { ref: listBottomRef, inView } = useInView();
@@ -14,10 +14,10 @@ export function useChatRoomListQuery() {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useInfiniteQuery({
+  } = useInfiniteQuery<ChatRoomListData>({
     queryKey: CHAT_ROOM_LIST_QUERY_KEY.ALL,
     initialPageParam: 0,
-    queryFn: ({ pageParam }) => getChatRoomListApi(pageParam),
+    queryFn: ({ pageParam }) => getChatRoomListApi(pageParam as number),
     getNextPageParam: lastPage =>
       lastPage.hasNext ? lastPage.pageNumber + 1 : undefined,
     retry: 1,

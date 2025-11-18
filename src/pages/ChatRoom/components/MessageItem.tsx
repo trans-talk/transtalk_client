@@ -1,11 +1,17 @@
+import useSettings from '@pages/Settings/hooks/use-settings';
 import type { MessageType } from '@type/message';
+import { formatMessageTime } from '@utils/time';
 
 interface MessageItemProps {
   message: MessageType;
 }
 
 export default function MessageItem({ message }: MessageItemProps) {
-  const { isUser, original, target, isUnread, chatTime } = message;
+  const { userData } = useSettings();
+
+  const { senderEmail, originalMessage, translatedMessage, isRead, sendAt } =
+    message;
+  const isUser = senderEmail === userData?.email;
 
   const messageAlignStyle = isUser ? 'items-end' : 'items-start';
   const baseMessageStyle =
@@ -21,16 +27,18 @@ export default function MessageItem({ message }: MessageItemProps) {
 
   return (
     <div className={`flex flex-col gap-[0.5rem] ${messageAlignStyle}`}>
-      <div className={originalMessageStyle}>{original}</div>
+      <div className={originalMessageStyle}>{originalMessage}</div>
       <div
         className={`flex w-full flex-row items-end gap-[1rem] ${isUser && 'justify-end'}`}
       >
-        {isUser && isUnread && (
+        {isUser && !isRead && (
           <span className='caption-10 text-primary-5 py-[0.3rem]'>1</span>
         )}
-        <div className={translatedMessageStyle}>{target}</div>
+        <div className={translatedMessageStyle}>{translatedMessage}</div>
       </div>
-      <span className='text-grayscale-4 px-[1rem]'>{chatTime}</span>
+      <span className='text-grayscale-4 px-[1rem]'>
+        {formatMessageTime(sendAt)}
+      </span>
     </div>
   );
 }

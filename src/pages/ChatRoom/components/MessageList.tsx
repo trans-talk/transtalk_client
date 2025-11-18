@@ -13,7 +13,7 @@ export default function MessageList({ messageList }: MessageListProps) {
     <>
       {messageList.length !== 0 ? (
         <div className='flex w-full flex-col gap-[1.5rem] px-[1.5rem] pt-[1.5rem] pb-[8rem]'>
-          {messageList.map(message => (
+          {[...messageList].reverse().map(message => (
             <MessageItem key={message.chatId} message={message} />
           ))}
         </div>

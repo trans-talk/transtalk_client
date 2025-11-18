@@ -1,0 +1,58 @@
+import { useEffect, useMemo, useRef } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { useInfiniteQuery } from '@tanstack/react-query';
+
+import { getChatHistoryApi, type ChatHistoryData } from '@pages/ChatRoom/api';
+import { CHAT_HISTORY_QUERY_KEY } from '@/querykey/chat-history';
+
+export default function useChatHistory(chatRoomId: string) {
+  const { ref: listTopRef, inView } = useInView({
+    rootMargin: '200px 0px 0px 0px',
+  });
+  const hasIgnoredInitialInViewRef = useRef(false);
+
+  const {
+    data,
+    isPending,
+    isError,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery<ChatHistoryData>({
+    queryKey: CHAT_HISTORY_QUERY_KEY.HISTORY(chatRoomId),
+    initialPageParam: 0,
+    queryFn: ({ pageParam }) =>
+      getChatHistoryApi(chatRoomId, pageParam as number),
+    getNextPageParam: lastPage =>
+      lastPage.hasNext ? lastPage.pageNumber + 1 : undefined,
+    retry: 1,
+  });
+
+  const chats = data?.pages.flatMap(page => page.chats) ?? [];
+
+  const recipient = useMemo(() => {
+    if (!data?.pages.length) return null;
+    return data.pages[0].recipient;
+  }, [data]);
+
+  useEffect(() => {
+    if (!inView) return;
+    if (!hasNextPage || isFetchingNextPage) return;
+
+    if (!hasIgnoredInitialInViewRef.current) {
+      hasIgnoredInitialInViewRef.current = true;
+      return;
+    }
+
+    fetchNextPage();
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  return {
+    listTopRef,
+    chatHistory: chats,
+    recipient,
+    isPending,
+    isError,
+    isFetchingNextPage,
+  };
+}

@@ -1,5 +1,6 @@
 import { ROUTES } from '@router/routes';
 import type { ChatRoomType } from '@type/room';
+import { formatMessageTime } from '@utils/time';
 import { useNavigate } from 'react-router-dom';
 
 interface ChatItemProps {
@@ -61,9 +62,11 @@ export default function ChatItem({ chat }: ChatItemProps) {
                 {formatLanguage(selectedLanguage)}
               </div>
             </div>
-            <span className='body-14 text-grayscale-4'>
-              {recentMessageTime}
-            </span>
+            {recentMessageTime && (
+              <span className='body-14 text-grayscale-4'>
+                {formatMessageTime(recentMessageTime)}
+              </span>
+            )}
           </div>
           <div className='flex flex-row items-center justify-between'>
             <div className='flex flex-col items-start'>
