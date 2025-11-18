@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
+import { useQueryClient, type InfiniteData } from '@tanstack/react-query';
 import type { IFrame, IMessage, StompSubscription } from '@stomp/stompjs';
 
 import { stompClient } from '@api/socket/websocket';
 import useSettings from '@pages/Settings/hooks/use-settings';
-import { useQueryClient, type InfiniteData } from '@tanstack/react-query';
-import type { ChatRoomType } from '@type/room';
-
-import { CHAT_ROOM_LIST_QUERY_KEY } from '@/querykey/chat-room-list';
 import type { ChatRoomListData } from '@pages/Home/api';
+import type { ChatRoomType } from '@type/room';
+import { CHAT_ROOM_LIST_QUERY_KEY } from '@/querykey/chat-room-list';
 
 export default function useSubscribeChatRoomList() {
   const { userData } = useSettings();
@@ -28,8 +27,7 @@ export default function useSubscribeChatRoomList() {
       queryClient.setQueryData<InfiniteData<ChatRoomListData> | undefined>(
         CHAT_ROOM_LIST_QUERY_KEY.ALL,
         prev => {
-          if (!prev) return prev;
-          if (prev.pages.length === 0) return prev;
+          if (!prev || prev.pages.length === 0) return prev;
 
           let found = false;
           let updatedRoom: ChatRoomType | null = null;

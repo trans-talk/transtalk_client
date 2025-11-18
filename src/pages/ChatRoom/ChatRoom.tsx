@@ -1,23 +1,39 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import ArrowLeft from '@assets/ui/arrow-left.svg';
 import Header from '@components/Header';
 import ChatPartnerProfile from '@pages/ChatRoom/components/ChatPartnerProfile';
-import { dummyChatRoom } from '@pages/ChatRoom/dummy-chat-room';
 
 import MessageInput from '@pages/ChatRoom/components/MessageInput';
 import MessageList from '@pages/ChatRoom/components/MessageList';
 import FloatingScrollButton from '@components/FloatingScrollButton';
-import type { UserDataType } from '@type/user';
-import type { MessageType } from '@type/message';
+import useSubscribeChatHistory from '@pages/ChatRoom/hooks/use-subscribe-chat-history';
+import useChatHistory from '@pages/ChatRoom/hooks/use-chat-history';
+import { ROUTES } from '@router/routes';
 
 export default function ChatRoom() {
   const navigate = useNavigate();
+  const { chatRoomId } = useParams();
 
-  const [userData, setUserData] = useState<UserDataType | null>(null);
-  const [messageList, setMessageList] = useState<MessageType[] | null>(null);
+  if (!chatRoomId) {
+    alert('방 정보가 없습니다');
+    throw new Error();
+  }
+
+  const {
+    listTopRef,
+    chatHistory,
+    recipient,
+    isPending,
+    isError,
+    isFetchingNextPage,
+  } = useChatHistory(chatRoomId);
+
+  const { sendMessage } = useSubscribeChatHistory(chatRoomId);
+
   const [inputText, setInputText] = useState('');
+  const isInitialScrollDoneRef = useRef(false);
 
   const handleGoBack = () => {
     navigate(-1);
@@ -26,20 +42,17 @@ export default function ChatRoom() {
   const handleChangeInputText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(e.target.value);
   };
+
   const handleSendMessage = () => {
-    // TODO : connect api.
-    console.log(inputText.trim(), ' send!');
+    const trimmed = inputText.trim();
+    if (!trimmed) return;
+    sendMessage(trimmed);
     setInputText('');
   };
 
   useEffect(() => {
-    // TODO : connect api.
-    setUserData(dummyChatRoom.user);
-    setMessageList(dummyChatRoom.messageList);
-  }, []);
-
-  useEffect(() => {
-    if (!messageList) return;
+    if (!chatHistory || chatHistory.length === 0) return;
+    if (isInitialScrollDoneRef.current) return;
 
     const timer = requestAnimationFrame(() => {
       const scrollHeight =
@@ -49,13 +62,32 @@ export default function ChatRoom() {
         top: scrollHeight,
         behavior: 'auto',
       });
+      isInitialScrollDoneRef.current = true;
     });
-
     return () => cancelAnimationFrame(timer);
-  }, [messageList]);
+  }, [chatHistory]);
+
+  if (isPending) {
+    return (
+      <div className='text-grayscale-4 body-14 w-full pt-[20rem] text-center'>
+        Loading...
+      </div>
+    );
+  }
+
+  if (isError) {
+    alert('방정보 오류입니다.');
+    navigate(ROUTES.HOME);
+  }
 
   return (
     <div className='bg-grayscale-1 min-h-dvh pt-[7rem]'>
+      <div ref={listTopRef} className='h-[0.1rem] w-full' />
+      {isFetchingNextPage && (
+        <div className='text-grayscale-4 body-14 pt-[1rem] text-center'>
+          Loading...
+        </div>
+      )}
       <Header
         left={
           <button
@@ -67,16 +99,16 @@ export default function ChatRoom() {
           </button>
         }
       >
-        {userData && (
+        {recipient && (
           <ChatPartnerProfile
-            id={userData.id}
-            picture={userData.picture}
-            name={userData.name}
-            email={userData.email}
+            recipientPicture={recipient.recipientPicture}
+            recipientEmail={recipient.recipientEmail}
+            recipientName={recipient.recipientName}
           />
         )}
       </Header>
-      {messageList && <MessageList messageList={messageList} />}
+
+      {chatHistory && <MessageList messageList={chatHistory} />}
       <MessageInput
         inputText={inputText}
         handleChangeInputText={handleChangeInputText}
