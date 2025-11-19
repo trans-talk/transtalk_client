@@ -19,13 +19,11 @@ export default function ChatRoom() {
   }
 
   const {
-    listTopRef,
-    chatHistory,
+    chatContainerRef,
     recipient,
     inputText,
     isPending,
     isError,
-    isFetchingNextPage,
     handleGoBack,
     handleChangeInputText,
     handleSendMessage,
@@ -65,20 +63,14 @@ export default function ChatRoom() {
           />
         )}
       </Header>
-      <div className='pt-[7rem]'>
-        <div ref={listTopRef} className='h-[0.1rem] w-full' />
-        {isFetchingNextPage && (
-          <div className='text-grayscale-4 body-14 pt-[1rem] text-center'>
-            Loading...
-          </div>
-        )}
-        {chatHistory && <MessageList messageList={chatHistory} />}
-        <MessageInput
-          inputText={inputText}
-          handleChangeInputText={handleChangeInputText}
-          handleSendMessage={handleSendMessage}
-        />
+      <div ref={chatContainerRef} className='pt-[7rem]'>
+        <MessageList chatRoomId={chatRoomId} />
       </div>
+      <MessageInput
+        inputText={inputText}
+        handleChangeInputText={handleChangeInputText}
+        handleSendMessage={handleSendMessage}
+      />
 
       <FloatingScrollButton isScrollTop={false} />
     </div>

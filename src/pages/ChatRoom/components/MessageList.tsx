@@ -1,21 +1,36 @@
 import { useTranslation } from 'react-i18next';
 import MessageItem from '@pages/ChatRoom/components/MessageItem';
-import type { MessageType } from '@type/message';
+import useChatHistory from '@pages/ChatRoom/hooks/use-chat-history';
 
 interface MessageListProps {
-  messageList: MessageType[];
+  chatRoomId: string;
 }
 
-export default function MessageList({ messageList }: MessageListProps) {
+export default function MessageList({ chatRoomId }: MessageListProps) {
   const { t } = useTranslation();
-
+  const { listTopRef, chatHistory, isFetchingNextPage } =
+    useChatHistory(chatRoomId);
+  const reversed = [...chatHistory].reverse();
   return (
     <>
-      {messageList.length !== 0 ? (
-        <div className='flex w-full flex-col gap-[1.5rem] px-[1.5rem] pt-[1.5rem] pb-[8rem]'>
-          {[...messageList].reverse().map(message => (
-            <MessageItem key={message.chatId} message={message} />
-          ))}
+      {chatHistory.length !== 0 ? (
+        <div className='flex w-full flex-col gap-[1.5rem] p-[1.5rem] pb-[8rem]'>
+          {isFetchingNextPage && (
+            <div className='text-grayscale-4 body-14 pt-[1rem] text-center'>
+              Loading...
+            </div>
+          )}
+          {reversed.map((message, index) => {
+            const isTopItem = index === 0;
+            return (
+              <div
+                key={message.chatId}
+                ref={isTopItem ? listTopRef : undefined}
+              >
+                <MessageItem message={message} />
+              </div>
+            );
+          })}
         </div>
       ) : (
         <div className='mt-[2rem] flex w-full justify-center'>

@@ -5,9 +5,7 @@ import { CHAT_ROOM_LIST_QUERY_KEY } from '@/querykey/chat-room-list';
 import { getChatRoomListApi, type ChatRoomListData } from '@pages/Home/api';
 
 export function useChatRoomListQuery() {
-  const { ref: listBottomRef, inView } = useInView({
-    threshold: 1,
-  });
+  const { ref: listBottomRef, inView } = useInView();
 
   const {
     data,

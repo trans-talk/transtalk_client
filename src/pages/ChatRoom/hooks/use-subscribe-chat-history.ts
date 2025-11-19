@@ -41,6 +41,7 @@ export default function useSubscribeChatHistory(chatRoomId: string) {
     const handleMessage = (message: IMessage) => {
       const payload: MessageType = JSON.parse(message.body);
 
+      // add new message to prev message list
       queryClient.setQueryData<InfiniteData<ChatHistoryData> | undefined>(
         CHAT_HISTORY_QUERY_KEY.HISTORY(chatRoomId),
         prev => {

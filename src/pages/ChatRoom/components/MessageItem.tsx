@@ -9,8 +9,7 @@ interface MessageItemProps {
 export default function MessageItem({ message }: MessageItemProps) {
   const { userData } = useSettings();
 
-  const { senderEmail, originalMessage, translatedMessage, isRead, sendAt } =
-    message;
+  const { senderEmail, originalMessage, translatedMessage, sendAt } = message;
   const isUser = senderEmail === userData?.email;
 
   const messageAlignStyle = isUser ? 'items-end' : 'items-start';
@@ -31,9 +30,10 @@ export default function MessageItem({ message }: MessageItemProps) {
       <div
         className={`flex w-full flex-row items-end gap-[1rem] ${isUser && 'justify-end'}`}
       >
-        {isUser && !isRead && (
+        {/* TODO : add unread indicator if server can provide */}
+        {/* {isUser && !isRead && (
           <span className='caption-10 text-primary-5 py-[0.3rem]'>1</span>
-        )}
+        )} */}
         <div className={translatedMessageStyle}>{translatedMessage}</div>
       </div>
       <span className='text-grayscale-4 px-[1rem]'>
