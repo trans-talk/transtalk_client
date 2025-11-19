@@ -7,6 +7,7 @@ import { type InfiniteData, useQueryClient } from '@tanstack/react-query';
 import type { MessageType } from '@type/message';
 import type { ChatHistoryData } from '@pages/ChatRoom/api';
 import { CHAT_HISTORY_QUERY_KEY } from '@/querykey/chat-history';
+import { scrollToBottom } from '@utils/scroll';
 
 export default function useSubscribeChatHistory(chatRoomId: string) {
   const navigate = useNavigate();
@@ -14,18 +15,16 @@ export default function useSubscribeChatHistory(chatRoomId: string) {
   const queryClient = useQueryClient();
 
   const sendMessage = (content: string) => {
-    if (!stompClient.connected) {
-      console.warn('STOMP not connected. Message not sent.');
-      return;
-    }
-
     const destination = `/app/chat/${chatRoomId}`;
 
     const body = JSON.stringify({
       content,
     });
 
-    stompClient.publish({ destination, body });
+    stompClient.publish({
+      destination,
+      body,
+    });
 
     console.log('[SEND]', destination, body);
   };
@@ -40,14 +39,19 @@ export default function useSubscribeChatHistory(chatRoomId: string) {
     let subscription: StompSubscription | null = null;
 
     const handleMessage = (message: IMessage) => {
-      console.log('[RECEIVE_RAW]', message);
       const payload: MessageType = JSON.parse(message.body);
-      console.log('[RECEIVE_PARSED]', payload);
 
       queryClient.setQueryData<InfiniteData<ChatHistoryData> | undefined>(
         CHAT_HISTORY_QUERY_KEY.HISTORY(chatRoomId),
         prev => {
           if (!prev) return prev;
+
+          const alreadyExists = prev.pages.some(page =>
+            page.chats.some(chat => chat.chatId === payload.chatId)
+          );
+          if (alreadyExists) {
+            return prev;
+          }
 
           const newPages = [...prev.pages];
           const lastPageIndex = newPages.length - 1;
@@ -68,43 +72,59 @@ export default function useSubscribeChatHistory(chatRoomId: string) {
           };
         }
       );
+
+      requestAnimationFrame(scrollToBottom);
     };
 
     const doSubscribe = () => {
-      if (subscription) return;
+      if (subscription) {
+        try {
+          subscription.unsubscribe();
+        } catch {}
+        subscription = null;
+      }
+
       subscription = stompClient.subscribe(destination, handleMessage);
-      console.log('subscribed to', destination);
+      console.log('[STOMP] subscribed to', destination);
     };
+
+    const prevOnConnect = stompClient.onConnect;
+    const prevOnWebSocketClose = stompClient.onWebSocketClose;
 
     if (stompClient.connected) {
       doSubscribe();
-    } else {
-      const prevOnConnect = stompClient.onConnect;
-
-      stompClient.onConnect = (frame: IFrame) => {
-        prevOnConnect?.(frame);
-        console.log('stomp connected (from Chat Room), subscribing…');
-        doSubscribe();
-      };
-
-      return () => {
-        if (subscription) {
-          subscription.unsubscribe();
-          subscription = null;
-          console.log('unsubscribed from', destination);
-        }
-        stompClient.onConnect = prevOnConnect;
-      };
     }
+    stompClient.onConnect = (frame: IFrame) => {
+      prevOnConnect?.(frame);
+      console.log('[STOMP] connected (from Chat Room), resubscribing…');
+      doSubscribe();
+    };
+
+    stompClient.onWebSocketClose = event => {
+      prevOnWebSocketClose?.(event);
+      console.log('[STOMP] websocket closed', event);
+
+      if (subscription) {
+        try {
+          subscription.unsubscribe();
+        } catch {}
+        subscription = null;
+      }
+    };
 
     return () => {
       if (subscription) {
-        subscription.unsubscribe();
+        try {
+          subscription.unsubscribe();
+        } catch {}
         subscription = null;
-        console.log('unsubscribed from', destination);
+        console.log('[STOMP] unsubscribed from', destination);
       }
+
+      stompClient.onConnect = prevOnConnect;
+      stompClient.onWebSocketClose = prevOnWebSocketClose;
     };
-  }, [chatRoomId]);
+  }, [chatRoomId, navigate, queryClient]);
 
   return {
     sendMessage,

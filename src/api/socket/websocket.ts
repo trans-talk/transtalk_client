@@ -11,6 +11,7 @@ export const stompClient = new Client({
 
   debug: msg => console.log('[STOMP]', msg),
 
+  // add Authorization header before connect
   beforeConnect(this: Client) {
     const accessToken = tokenStorage.getAccessToken();
     const cleanedToken = accessToken?.replace(/^Bearer\s+/i, '');
@@ -29,6 +30,53 @@ export const stompClient = new Client({
   },
 
   onStompError: frame => {
-    console.error('STOMP error:', frame.headers['message']);
+    console.error('STOMP error:', frame);
+
+    stompClient.deactivate().finally(() => {
+      console.log('[STOMP] restart after error');
+      stompClient.activate();
+    });
   },
 });
+
+// add Authorization header to all publish
+const originalPublish = stompClient.publish.bind(stompClient);
+stompClient.publish = function (args) {
+  const token = tokenStorage.getAccessToken();
+  const cleaned = token?.replace(/^Bearer\s+/i, '');
+
+  args.headers = {
+    ...args.headers,
+    ...(cleaned && { Authorization: cleaned }),
+  };
+
+  return originalPublish(args);
+};
+
+// add Authorization header to all subscribe
+const originalSubscribe = stompClient.subscribe.bind(stompClient);
+stompClient.subscribe = function (destination, callback, headers = {}) {
+  const token = tokenStorage.getAccessToken();
+  const cleaned = token?.replace(/^Bearer\s+/i, '');
+
+  const newHeaders = {
+    ...headers,
+    ...(cleaned && { Authorization: cleaned }),
+  };
+
+  return originalSubscribe(destination, callback, newHeaders);
+};
+
+// add Authorization header to all unsubscribe
+const originalUnsubscribe = stompClient.unsubscribe.bind(stompClient);
+stompClient.unsubscribe = function (id, headers = {}) {
+  const token = tokenStorage.getAccessToken();
+  const cleaned = token?.replace(/^Bearer\s+/i, '');
+
+  const newHeaders = {
+    ...headers,
+    ...(cleaned && { Authorization: cleaned }),
+  };
+
+  return originalUnsubscribe(id, newHeaders);
+};

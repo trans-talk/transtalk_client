@@ -74,40 +74,52 @@ export default function useSubscribeChatRoomList() {
     };
 
     const doSubscribe = () => {
-      if (subscription) return;
+      if (subscription) {
+        try {
+          subscription.unsubscribe();
+        } catch {}
+        subscription = null;
+      }
 
       subscription = stompClient.subscribe(destination, handleMessage);
-
-      console.log('subscribed to', destination);
+      console.log('[STOMP] subscribed to', destination);
     };
+
+    const prevOnConnect = stompClient.onConnect;
+    const prevOnWebSocketClose = stompClient.onWebSocketClose;
 
     if (stompClient.connected) {
       doSubscribe();
-    } else {
-      const prevOnConnect = stompClient.onConnect;
-
-      stompClient.onConnect = (frame: IFrame) => {
-        prevOnConnect?.(frame);
-        console.log('stomp connected (from Home), subscribing…');
-        doSubscribe();
-      };
-
-      return () => {
-        if (subscription) {
-          subscription.unsubscribe();
-          subscription = null;
-          console.log('unsubscribed from', destination);
-        }
-        stompClient.onConnect = prevOnConnect;
-      };
     }
+    stompClient.onConnect = (frame: IFrame) => {
+      prevOnConnect?.(frame);
+      console.log('[STOMP] connected (from Chat Room), resubscribing…');
+      doSubscribe();
+    };
+
+    stompClient.onWebSocketClose = event => {
+      prevOnWebSocketClose?.(event);
+      console.log('[STOMP] websocket closed', event);
+
+      if (subscription) {
+        try {
+          subscription.unsubscribe();
+        } catch {}
+        subscription = null;
+      }
+    };
 
     return () => {
       if (subscription) {
-        subscription.unsubscribe();
+        try {
+          subscription.unsubscribe();
+        } catch {}
         subscription = null;
-        console.log('unsubscribed from', destination);
+        console.log('[STOMP] unsubscribed from', destination);
       }
+
+      stompClient.onConnect = prevOnConnect;
+      stompClient.onWebSocketClose = prevOnWebSocketClose;
     };
   }, [userId, queryClient]);
 }

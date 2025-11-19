@@ -17,8 +17,7 @@ export default function Home() {
 
   useSubscribeChatRoomList();
 
-  const { listBottomRef, chatList, isPendingChatRoomList, isFetchingNextPage } =
-    useChatRoomListQuery();
+  const { isPendingChatRoomList } = useChatRoomListQuery();
 
   const {
     isModalOpen,
@@ -72,17 +71,12 @@ export default function Home() {
           </span>
         </div>
       ) : (
-        <ChatList chatList={chatList} />
+        <ChatList />
       )}
 
       {isModalOpen && <AddChatModal handleCloseModal={handleCloseModal} />}
       <FloatingAddChatButton handleOpenModal={handleOpenModal} />
       <FloatingScrollButton />
-
-      <div ref={listBottomRef} className='h-[0.1rem] w-full' />
-      {isFetchingNextPage && (
-        <div className='text-grayscale-4 body-14 text-center'>Loading...</div>
-      )}
     </div>
   );
 }
