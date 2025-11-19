@@ -5,14 +5,9 @@ import { stompClient } from '@api/socket/websocket';
 
 export default function Layout() {
   useEffect(() => {
-    let isSubscribed = true;
-
-    if (isSubscribed) {
-      stompClient.activate();
-    }
+    stompClient.activate();
 
     return () => {
-      isSubscribed = false;
       stompClient.deactivate();
     };
   }, []);
