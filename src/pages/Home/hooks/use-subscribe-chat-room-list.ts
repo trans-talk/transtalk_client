@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
+import { useCallback } from 'react';
 import { useQueryClient, type InfiniteData } from '@tanstack/react-query';
-import type { IFrame, IMessage, StompSubscription } from '@stomp/stompjs';
+import type { IMessage } from '@stomp/stompjs';
 
-import { stompClient } from '@api/socket/websocket';
 import useSettings from '@pages/Settings/hooks/use-settings';
 import type { ChatRoomListData } from '@pages/Home/api';
 import type { ChatRoomType } from '@type/room';
+import useStompSubscription from '@hooks/use-stomp-subscription';
 import { CHAT_ROOM_LIST_QUERY_KEY } from '@/querykey/chat-room-list';
 
 export default function useSubscribeChatRoomList() {
@@ -14,13 +14,8 @@ export default function useSubscribeChatRoomList() {
 
   const queryClient = useQueryClient();
 
-  useEffect(() => {
-    if (!userId) return;
-
-    const destination = `/topic/users/${userId}/chatRoom`;
-    let subscription: StompSubscription | null = null;
-
-    const handleMessage = (message: IMessage) => {
+  const handleMessage = useCallback(
+    (message: IMessage) => {
       const payload: ChatRoomType = JSON.parse(message.body);
       const roomId = payload.chatroomId;
 
@@ -32,7 +27,6 @@ export default function useSubscribeChatRoomList() {
           let found = false;
           let updatedRoom: ChatRoomType | null = null;
 
-          // Extract updatedRoom and filteredPagesData
           const pagesWithoutUpdatedRoom = prev.pages.map(page => {
             const filteredRooms = page.rooms.filter(room => {
               if (room.chatroomId === roomId) {
@@ -46,7 +40,7 @@ export default function useSubscribeChatRoomList() {
             return { ...page, rooms: filteredRooms };
           });
 
-          // Existed Chat Room(found) -> Update and go first
+          // 기존 방이 있었던 경우: 업데이트 후 맨 앞으로
           if (found && updatedRoom) {
             const [first, ...rest] = pagesWithoutUpdatedRoom;
             const updatedFirst = {
@@ -57,7 +51,7 @@ export default function useSubscribeChatRoomList() {
             return { ...prev, pages: [updatedFirst, ...rest] };
           }
 
-          // New Chat Room -> Add payload to first
+          // 새로운 방인 경우: 첫 페이지 맨 앞에 추가
           if (!found && pagesWithoutUpdatedRoom.length > 0) {
             const [first, ...rest] = pagesWithoutUpdatedRoom;
             const newFirst = {
@@ -71,55 +65,14 @@ export default function useSubscribeChatRoomList() {
           return { ...prev, pages: pagesWithoutUpdatedRoom };
         }
       );
-    };
+    },
+    [queryClient]
+  );
 
-    const doSubscribe = () => {
-      if (subscription) {
-        try {
-          subscription.unsubscribe();
-        } catch {}
-        subscription = null;
-      }
+  const destination = userId ? `/topic/users/${userId}/chatRoom` : null;
 
-      subscription = stompClient.subscribe(destination, handleMessage);
-      console.log('[STOMP] subscribed to', destination);
-    };
-
-    const prevOnConnect = stompClient.onConnect;
-    const prevOnWebSocketClose = stompClient.onWebSocketClose;
-
-    if (stompClient.connected) {
-      doSubscribe();
-    }
-    stompClient.onConnect = (frame: IFrame) => {
-      prevOnConnect?.(frame);
-      console.log('[STOMP] connected (from Chat Room), resubscribing…');
-      doSubscribe();
-    };
-
-    stompClient.onWebSocketClose = event => {
-      prevOnWebSocketClose?.(event);
-      console.log('[STOMP] websocket closed', event);
-
-      if (subscription) {
-        try {
-          subscription.unsubscribe();
-        } catch {}
-        subscription = null;
-      }
-    };
-
-    return () => {
-      if (subscription) {
-        try {
-          subscription.unsubscribe();
-        } catch {}
-        subscription = null;
-        console.log('[STOMP] unsubscribed from', destination);
-      }
-
-      stompClient.onConnect = prevOnConnect;
-      stompClient.onWebSocketClose = prevOnWebSocketClose;
-    };
-  }, [userId, queryClient]);
+  useStompSubscription({
+    destination,
+    handleMessage,
+  });
 }
