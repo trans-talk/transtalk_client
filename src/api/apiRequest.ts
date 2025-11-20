@@ -5,7 +5,7 @@ import axios, {
   type InternalAxiosRequestConfig,
 } from 'axios';
 
-import { reissueAccessToken } from '@api/reissueAccessToken';
+import { reissueAccessToken } from '@api/reissue-access-token';
 import { applyAuthorizationHeader, tokenStorage } from '@utils/token';
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';

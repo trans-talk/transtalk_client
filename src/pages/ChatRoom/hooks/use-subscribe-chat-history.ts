@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import type { IMessage } from '@stomp/stompjs';
 import { useQueryClient, type InfiniteData } from '@tanstack/react-query';
 
-import { stompClient } from '@api/socket/websocket';
+import { stompClient } from '@socket/websocket';
 import type { MessageType } from '@type/message';
-import useStompSubscription from '@hooks/use-stomp-subscription';
+import useStompSubscription from '@socket/hooks/use-stomp-subscription';
 import { CHAT_HISTORY_QUERY_KEY } from '@/querykey/chat-history';
 import { scrollToBottom } from '@utils/scroll';
 import type { ChatHistoryData } from '@pages/ChatRoom/api';

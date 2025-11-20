@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import MessageItem from '@pages/ChatRoom/components/MessageItem';
 import useChatHistory from '@pages/ChatRoom/hooks/use-chat-history';
+import Loading from '@components/Loading';
 
 interface MessageListProps {
   chatRoomId: string;
@@ -15,11 +16,7 @@ export default function MessageList({ chatRoomId }: MessageListProps) {
     <>
       {chatHistory.length !== 0 ? (
         <div className='flex w-full flex-col gap-[1.5rem] p-[1.5rem] pb-[8rem]'>
-          {isFetchingNextPage && (
-            <div className='text-grayscale-4 body-14 pt-[1rem] text-center'>
-              Loading...
-            </div>
-          )}
+          {isFetchingNextPage && <Loading />}
           {reversed.map((message, index) => {
             const isTopItem = index === 0;
             return (

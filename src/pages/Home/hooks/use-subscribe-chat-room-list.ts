@@ -5,7 +5,7 @@ import type { IMessage } from '@stomp/stompjs';
 import useSettings from '@pages/Settings/hooks/use-settings';
 import type { ChatRoomListData } from '@pages/Home/api';
 import type { ChatRoomType } from '@type/room';
-import useStompSubscription from '@hooks/use-stomp-subscription';
+import useStompSubscription from '@socket/hooks/use-stomp-subscription';
 import { CHAT_ROOM_LIST_QUERY_KEY } from '@/querykey/chat-room-list';
 
 export default function useSubscribeChatRoomList() {

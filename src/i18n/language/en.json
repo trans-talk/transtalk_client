@@ -31,5 +31,6 @@
   "chatRoom": {
     "input": "Type a message...",
     "empty": "Start the conversation!"
-  }
+  },
+  "loading": "Loading..."
 }

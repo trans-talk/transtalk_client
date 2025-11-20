@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import type { IFrame, IMessage, StompSubscription } from '@stomp/stompjs';
 
-import { stompClient } from '@api/socket/websocket';
+import { stompClient } from '@socket/websocket';
 
 interface UseStompSubscriptionParams {
   destination: string | null;

@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import ChatItem from '@pages/Home/components/ChatItem';
 import { useChatRoomListQuery } from '@pages/Home/hooks/use-chat-room-list-query';
+import Loading from '@components/Loading';
 
 interface ChatListProps {}
 
@@ -16,9 +17,7 @@ export default function ChatList({}: ChatListProps) {
       ))}
 
       <div ref={listBottomRef} className='h-[0.1rem] w-full' />
-      {isFetchingNextPage && (
-        <div className='text-grayscale-4 body-14 text-center'>Loading...</div>
-      )}
+      {isFetchingNextPage && <Loading />}
       {chatList?.length === 0 && (
         <div className='mt-[20rem] flex w-full items-center justify-center'>
           <span className='text-grayscale-4 body-14 text-center whitespace-pre-line'>

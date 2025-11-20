@@ -11,6 +11,7 @@ import ChatList from '@pages/Home/components/ChatList';
 import { useChatRoomListQuery } from '@pages/Home/hooks/use-chat-room-list-query';
 import useChatRoomListState from '@pages/Home/hooks/use-chat-room-list-state';
 import useSubscribeChatRoomList from '@pages/Home/hooks/use-subscribe-chat-room-list';
+import Loading from '@components/Loading';
 
 export default function Home() {
   const { t } = useTranslation();
@@ -66,9 +67,7 @@ export default function Home() {
 
       {isPendingChatRoomList ? (
         <div className='mt-[20rem] flex w-full items-center justify-center'>
-          <span className='text-grayscale-4 body-14 text-center'>
-            Loading...
-          </span>
+          <Loading />
         </div>
       ) : (
         <ChatList />

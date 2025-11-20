@@ -8,6 +8,7 @@ import MessageList from '@pages/ChatRoom/components/MessageList';
 import FloatingScrollButton from '@components/FloatingScrollButton';
 import useChatHistory from '@pages/ChatRoom/hooks/use-chat-history';
 import { ROUTES } from '@router/routes';
+import Loading from '@components/Loading';
 
 export default function ChatRoom() {
   const navigate = useNavigate();
@@ -31,8 +32,8 @@ export default function ChatRoom() {
 
   if (isPending) {
     return (
-      <div className='text-grayscale-4 body-14 w-full pt-[20rem] text-center'>
-        Loading...
+      <div className='w-full pt-[20rem] text-center'>
+        <Loading />
       </div>
     );
   }
