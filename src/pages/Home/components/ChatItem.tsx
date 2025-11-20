@@ -1,7 +1,9 @@
+import { useNavigate } from 'react-router-dom';
+
 import { ROUTES } from '@router/routes';
 import type { ChatRoomType } from '@type/room';
-import { formatMessageTime } from '@utils/time';
-import { useNavigate } from 'react-router-dom';
+import { formatLanguage } from '@pages/Home/utils/format-language';
+import { formatMessageTime, isToday } from '@utils/time';
 
 interface ChatItemProps {
   chat: ChatRoomType;
@@ -21,25 +23,10 @@ export default function ChatItem({ chat }: ChatItemProps) {
     unreadMessageCount,
   } = chat;
 
+  const { datePart, timePart } = formatMessageTime(recentMessageTime);
+
   const handleToChatRoom = () => {
     navigate(`${ROUTES.CHAT_ROOM}/${chatroomId}`);
-  };
-
-  const formatLanguage = (language: string): string => {
-    switch (language) {
-      case 'ko':
-        return 'Korean';
-      case 'en-us':
-        return 'English';
-      case 'ja':
-        return 'Japanese';
-      case 'zh':
-        return 'Chinese';
-      case 'es':
-        return 'Spanish';
-      default:
-        return language;
-    }
   };
 
   return (
@@ -64,7 +51,7 @@ export default function ChatItem({ chat }: ChatItemProps) {
             </div>
             {recentMessageTime && (
               <span className='body-14 text-grayscale-4'>
-                {formatMessageTime(recentMessageTime)}
+                {isToday(recentMessageTime) ? timePart : datePart}
               </span>
             )}
           </div>
