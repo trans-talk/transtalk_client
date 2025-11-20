@@ -6,9 +6,11 @@ import ChatPartnerProfile from '@pages/ChatRoom/components/ChatPartnerProfile';
 import MessageInput from '@pages/ChatRoom/components/MessageInput';
 import MessageList from '@pages/ChatRoom/components/MessageList';
 import FloatingScrollButton from '@components/FloatingScrollButton';
-import useChatHistory from '@pages/ChatRoom/hooks/use-chat-history';
+import useChatHistoryQuery from '@pages/ChatRoom/hooks/use-chat-history-query';
 import { ROUTES } from '@router/routes';
 import Loading from '@components/Loading';
+import { useEffect } from 'react';
+import { scrollToBottomInstant } from '@utils/scroll';
 
 export default function ChatRoom() {
   const navigate = useNavigate();
@@ -19,16 +21,16 @@ export default function ChatRoom() {
     throw new Error();
   }
 
-  const {
-    chatContainerRef,
-    recipient,
-    inputText,
-    isPending,
-    isError,
-    handleGoBack,
-    handleChangeInputText,
-    handleSendMessage,
-  } = useChatHistory(chatRoomId);
+  const { chatContainerRef, recipient, isPending, isError } =
+    useChatHistoryQuery(chatRoomId);
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
+  useEffect(() => {
+    scrollToBottomInstant();
+  }, []);
 
   if (isPending) {
     return (
@@ -67,12 +69,7 @@ export default function ChatRoom() {
       <div ref={chatContainerRef} className='pt-[7rem]'>
         <MessageList chatRoomId={chatRoomId} />
       </div>
-      <MessageInput
-        inputText={inputText}
-        handleChangeInputText={handleChangeInputText}
-        handleSendMessage={handleSendMessage}
-      />
-
+      <MessageInput chatRoomId={chatRoomId} />
       <FloatingScrollButton isScrollTop={false} />
     </div>
   );

@@ -13,6 +13,8 @@ export default function SearchBar({
   handleCloseSearchMode,
 }: SearchBarProps) {
   const { t } = useTranslation();
+
+  // TODO : Add Search feature
   return (
     <div className='border-grayscale-3 fixed top-[0] z-50 flex w-full max-w-[60rem] flex-row items-center gap-[1.5rem] border-b bg-white px-[1.5rem] py-[1rem]'>
       <input

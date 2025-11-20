@@ -4,7 +4,7 @@ import { ROUTES } from '@router/routes';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
-export default function useCreateNewChat(
+export default function useCreateNewChatQuery(
   language: string,
   recipientEmail: string
 ) {

@@ -7,8 +7,16 @@ interface ChatListProps {}
 
 export default function ChatList({}: ChatListProps) {
   const { t } = useTranslation();
-  const { listBottomRef, chatList, isFetchingNextPage } =
+  const { listBottomRef, chatList, isFetchingNextPage, isPendingChatRoomList } =
     useChatRoomListQuery();
+
+  if (isPendingChatRoomList) {
+    return (
+      <div className='mt-[20rem] flex w-full items-center justify-center'>
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <div className='flex w-full flex-col'>

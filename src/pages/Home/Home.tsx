@@ -8,17 +8,14 @@ import AddChatModal from '@pages/Home/components/AddChatModal';
 import FloatingScrollButton from '@components/FloatingScrollButton';
 import SearchBar from '@pages/Home/components/SearchBar';
 import ChatList from '@pages/Home/components/ChatList';
-import { useChatRoomListQuery } from '@pages/Home/hooks/use-chat-room-list-query';
+
 import useChatRoomListState from '@pages/Home/hooks/use-chat-room-list-state';
 import useSubscribeChatRoomList from '@pages/Home/hooks/use-subscribe-chat-room-list';
-import Loading from '@components/Loading';
 
 export default function Home() {
   const { t } = useTranslation();
 
   useSubscribeChatRoomList();
-
-  const { isPendingChatRoomList } = useChatRoomListQuery();
 
   const {
     isModalOpen,
@@ -64,15 +61,7 @@ export default function Home() {
           <h1 className='header-20'>{t('home.header')}</h1>
         </Header>
       )}
-
-      {isPendingChatRoomList ? (
-        <div className='mt-[20rem] flex w-full items-center justify-center'>
-          <Loading />
-        </div>
-      ) : (
-        <ChatList />
-      )}
-
+      <ChatList />
       {isModalOpen && <AddChatModal handleCloseModal={handleCloseModal} />}
       <FloatingAddChatButton handleOpenModal={handleOpenModal} />
       <FloatingScrollButton />

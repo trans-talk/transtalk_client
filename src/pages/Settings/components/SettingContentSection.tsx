@@ -17,6 +17,8 @@ export default function SettingContentSection() {
   };
   const handleWithdraw = () => {
     alert('withdraw');
+    tokenStorage.clearTokens();
+    navigate(ROUTES.LOGIN);
   };
   return (
     <div className='flex flex-col px-[3rem] py-[2rem]'>

@@ -40,7 +40,7 @@ export default function useSubscribeChatRoomList() {
             return { ...page, rooms: filteredRooms };
           });
 
-          // 기존 방이 있었던 경우: 업데이트 후 맨 앞으로
+          // Existing room: update and move to the top
           if (found && updatedRoom) {
             const [first, ...rest] = pagesWithoutUpdatedRoom;
             const updatedFirst = {
@@ -51,7 +51,7 @@ export default function useSubscribeChatRoomList() {
             return { ...prev, pages: [updatedFirst, ...rest] };
           }
 
-          // 새로운 방인 경우: 첫 페이지 맨 앞에 추가
+          // New room: insert at the top of the first page
           if (!found && pagesWithoutUpdatedRoom.length > 0) {
             const [first, ...rest] = pagesWithoutUpdatedRoom;
             const newFirst = {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import CloseIcon from '@assets/ui/close.svg';
-import useCreateNewChat from '@pages/Home/hooks/use-create-new-chat';
+import useCreateNewChatQuery from '@pages/Home/hooks/use-create-new-chat-query';
 
 interface AddChatModalProps {
   handleCloseModal: () => void;
@@ -24,7 +24,10 @@ export default function AddChatModal({ handleCloseModal }: AddChatModalProps) {
   ) => {
     setTargetLanguage(e.target.value);
   };
-  const { handleCreateNewChat } = useCreateNewChat(targetLanguage, inputEmail);
+  const { handleCreateNewChat } = useCreateNewChatQuery(
+    targetLanguage,
+    inputEmail
+  );
 
   return (
     <div className='fixed top-[0] left-1/2 z-50 h-[100dvh] w-full max-w-[60rem] -translate-x-1/2 bg-black/50'>

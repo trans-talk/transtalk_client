@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { getAuthorizationCode, loginApi } from '@pages/Login/api';
 import { tokenStorage } from '@utils/token';
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '@router/routes';
 
 export default function useLogin() {
   const navigate = useNavigate();
@@ -14,6 +15,25 @@ export default function useLogin() {
     mutationFn: getAuthorizationCode,
   });
 
+  const handleToggleLoginButton = async () => {
+    try {
+      const response = await handleAuthorizationCode();
+
+      const redirectUrl = response.data;
+
+      if (!redirectUrl) {
+        alert('Empty redirect URL from /auth');
+        navigate(ROUTES.LOGIN);
+        return;
+      }
+
+      window.location.href = redirectUrl;
+    } catch (e) {
+      alert(`Login error, ${e}`);
+      navigate(ROUTES.LOGIN);
+    }
+  };
+
   const {
     mutate: handleLogin,
     isPending: isPendingLogin,
@@ -24,10 +44,11 @@ export default function useLogin() {
       const accessToken = response.tokenresponse.accessToken;
 
       tokenStorage.setAccessToken(accessToken);
-      navigate('/');
+      navigate(ROUTES.HOME);
     },
     onError: error => {
-      alert(`${error} 에러 발생`);
+      alert(`${error} error`);
+      navigate(ROUTES.LOGIN);
     },
   });
 
@@ -36,7 +57,7 @@ export default function useLogin() {
     error,
     isPendingLogin,
     isErrorLogin,
-    handleAuthorizationCode,
+    handleToggleLoginButton,
     handleLogin,
   };
 }

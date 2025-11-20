@@ -1,26 +1,17 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useMemo, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { getChatHistoryApi, type ChatHistoryData } from '@pages/ChatRoom/api';
 import { CHAT_HISTORY_QUERY_KEY } from '@/querykey/chat-history';
-import useSubscribeChatHistory from '@pages/ChatRoom/hooks/use-subscribe-chat-history';
-import { scrollToBottomInstant } from '@utils/scroll';
 
-export default function useChatHistory(chatRoomId: string) {
-  const navigate = useNavigate();
-
+export default function useChatHistoryQuery(chatRoomId: string) {
   const { ref: listTopRef, inView } = useInView({
     rootMargin: '150px 0px 0px 0px',
   });
   const chatContainerRef = useRef<HTMLDivElement | null>(null);
   const prevScrollHeightRef = useRef<number | null>(null);
   const prevInViewRef = useRef(false);
-
-  const [inputText, setInputText] = useState('');
-
-  const { sendMessage } = useSubscribeChatHistory(chatRoomId);
 
   const {
     data,
@@ -44,21 +35,6 @@ export default function useChatHistory(chatRoomId: string) {
     if (!data?.pages.length) return null;
     return data.pages[0].recipient;
   }, [data]);
-
-  const handleGoBack = () => {
-    navigate(-1);
-  };
-
-  const handleChangeInputText = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputText(e.target.value);
-  };
-
-  const handleSendMessage = () => {
-    const trimmed = inputText.trim();
-    if (!trimmed) return;
-    sendMessage(trimmed);
-    setInputText('');
-  };
 
   useEffect(() => {
     const isEnter = inView && !prevInViewRef.current;
@@ -84,21 +60,13 @@ export default function useChatHistory(chatRoomId: string) {
     }
   }, [isFetchingNextPage]);
 
-  useEffect(() => {
-    scrollToBottomInstant();
-  }, []);
-
   return {
     listTopRef,
     chatContainerRef,
     chatHistory: chats,
     recipient,
-    inputText,
     isPending,
     isError,
     isFetchingNextPage,
-    handleGoBack,
-    handleChangeInputText,
-    handleSendMessage,
   };
 }

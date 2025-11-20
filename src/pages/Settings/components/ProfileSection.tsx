@@ -1,8 +1,10 @@
-import useSettings from '@pages/Settings/hooks/use-settings';
+import type { UserDataType } from '@type/user';
 
-export default function ProfileSection() {
-  const { userData } = useSettings();
+interface ProfileSectionProps {
+  userData?: UserDataType;
+}
 
+export default function ProfileSection({ userData }: ProfileSectionProps) {
   return (
     <div className='border-grayscale-3 flex flex-col items-center gap-[1.2rem] border-b p-[2rem]'>
       <img

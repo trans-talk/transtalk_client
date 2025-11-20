@@ -1,18 +1,16 @@
 import { useTranslation } from 'react-i18next';
 import SendIcon from '@assets/ui/send.svg';
+import useSendMessage from '@pages/ChatRoom/hooks/use-send-message';
 
 interface MessageInputProps {
-  inputText: string;
-  handleChangeInputText: (_e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSendMessage: () => void;
+  chatRoomId: string;
 }
 
-export default function MessageInput({
-  inputText,
-  handleChangeInputText,
-  handleSendMessage,
-}: MessageInputProps) {
+export default function MessageInput({ chatRoomId }: MessageInputProps) {
   const { t } = useTranslation();
+
+  const { inputText, handleChangeInputText, handleSendMessage } =
+    useSendMessage(chatRoomId);
 
   const isDisabledToSend = inputText.trim() === '';
   const handleOnKeyDownSendMessage = (
