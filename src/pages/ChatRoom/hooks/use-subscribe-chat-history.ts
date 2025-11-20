@@ -47,8 +47,8 @@ export default function useSubscribeChatHistory(chatRoomId: string) {
           if (alreadyExists) return prev;
 
           const newPages = [...prev.pages];
-          const lastPageIndex = newPages.length - 1;
-          const lastPage = newPages[lastPageIndex];
+          const lastPageIndex = 0;
+          const lastPage = newPages[0];
           if (!lastPage) return prev;
 
           const updatedLastPage: ChatHistoryData = {
@@ -64,7 +64,7 @@ export default function useSubscribeChatHistory(chatRoomId: string) {
 
       requestAnimationFrame(scrollToBottom);
     },
-    [chatRoomId, queryClient]
+    [chatRoomId]
   );
 
   const destination = `/topic/chat/${chatRoomId}`;

@@ -4,6 +4,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { getChatHistoryApi, type ChatHistoryData } from '@pages/ChatRoom/api';
 import { CHAT_HISTORY_QUERY_KEY } from '@/querykey/chat-history';
+import { scrollToBottomInstant } from '@utils/scroll';
 
 export default function useChatHistoryQuery(chatRoomId: string) {
   const { ref: listTopRef, inView } = useInView({
@@ -59,6 +60,10 @@ export default function useChatHistoryQuery(chatRoomId: string) {
       prevScrollHeightRef.current = null;
     }
   }, [isFetchingNextPage]);
+
+  useEffect(() => {
+    scrollToBottomInstant();
+  }, []);
 
   return {
     listTopRef,

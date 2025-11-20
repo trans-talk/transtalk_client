@@ -9,8 +9,6 @@ import FloatingScrollButton from '@components/FloatingScrollButton';
 import useChatHistoryQuery from '@pages/ChatRoom/hooks/use-chat-history-query';
 import { ROUTES } from '@router/routes';
 import Loading from '@components/Loading';
-import { useEffect } from 'react';
-import { scrollToBottomInstant } from '@utils/scroll';
 
 export default function ChatRoom() {
   const navigate = useNavigate();
@@ -27,10 +25,6 @@ export default function ChatRoom() {
   const handleGoBack = () => {
     navigate(-1);
   };
-
-  useEffect(() => {
-    scrollToBottomInstant();
-  }, []);
 
   if (isPending) {
     return (
