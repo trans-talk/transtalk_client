@@ -17,7 +17,8 @@ export const formatMessageTime = (isoString: string) => {
 };
 
 export const isToday = (isoString: string) => {
-  const currentDate = new Date();
+  const today = new Date();
   const messageDate = new Date(isoString);
-  return currentDate.getDate() === messageDate.getDate();
+
+  return today.toDateString() === messageDate.toDateString();
 };
