@@ -12,6 +12,8 @@ export default function MessageItem({ message }: MessageItemProps) {
   const { senderEmail, originalMessage, translatedMessage, sendAt } = message;
   const isUser = senderEmail === userData?.email;
 
+  const { timePart } = formatMessageTime(sendAt);
+
   const messageAlignStyle = isUser ? 'items-end' : 'items-start';
   const baseMessageStyle =
     'body-16 max-w-[75%] px-[1.5rem] py-[1rem] rounded-[2rem]';
@@ -36,9 +38,7 @@ export default function MessageItem({ message }: MessageItemProps) {
         )} */}
         <div className={translatedMessageStyle}>{translatedMessage}</div>
       </div>
-      <span className='text-grayscale-4 px-[1rem]'>
-        {formatMessageTime(sendAt)}
-      </span>
+      <span className='text-grayscale-4 body-12 px-[1rem]'>{timePart}</span>
     </div>
   );
 }
