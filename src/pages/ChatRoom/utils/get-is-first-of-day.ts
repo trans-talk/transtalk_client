@@ -8,6 +8,10 @@ export const getIsFirstOfDay = (messages: MessageType[], index: number) => {
 
   const currentDate = formatMessageTime(messages[index].sendAt).datePart;
 
+  if (index === 0) {
+    return true;
+  }
+
   const prevMessage = messages[index - 1];
   const prevDate = formatMessageTime(prevMessage.sendAt).datePart;
 
