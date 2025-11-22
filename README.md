@@ -90,7 +90,7 @@
   <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">
 </div>
 
-- **배포** : `Vercel`
+- 배포 : `Vercel`
 - 빌드 : `Vite`
 - 다국어 지원 : `i18next`
 - 프레임워크 & 언어 : `React`, `Typescript`
@@ -98,6 +98,17 @@
 - 상태관리 : `Tanstack query`
 - 데이터 페칭 : `axios`
 - 웹소켓 : `Stompjs`, `Sockjs`
+
+## 🔑 핵심 기술
+
+- **WebSocket 기반 실시간 통신**  
+  STOMP.js와 SockJS를 활용해 채팅방 리스트 및 채팅 메시지를 실시간으로 주고받을 수 있도록 구현했습니다.
+
+- **TanStack Query를 활용한 데이터/상태 관리 & 무한 스크롤**  
+  TanStack Query로 서버 상태를 효율적으로 관리하고 채팅방 리스트와 채팅 내역에 **무한 스크롤**을 적용해 불필요한 네트워크 요청을 줄였습니다.
+
+- **i18next 기반 다국어 지원**  
+  i18next를 사용해 브라우저 언어 설정에 따라 UI 언어가 자동으로 적용되도록 했고, 추후 언어 확장도 용이한 구조로 설계했습니다.
 
 ## 📃 페이지별 기능
 
