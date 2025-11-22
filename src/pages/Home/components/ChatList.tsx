@@ -28,13 +28,20 @@ export default function ChatList({ searchText }: ChatListProps) {
 
       <div ref={listBottomRef} className='h-[0.1rem] w-full' />
       {isFetchingNextPage && <Loading />}
-      {chatList?.length === 0 && (
-        <div className='mt-[20rem] flex w-full items-center justify-center'>
-          <span className='text-grayscale-4 body-14 text-center whitespace-pre-line'>
-            {t('home.empty')}
-          </span>
-        </div>
-      )}
+      {chatList?.length === 0 &&
+        (searchText === '' ? (
+          <div className='mt-[20rem] flex w-full items-center justify-center'>
+            <span className='text-grayscale-4 body-14 text-center whitespace-pre-line'>
+              {t('home.empty')}
+            </span>
+          </div>
+        ) : (
+          <div className='mt-[20rem] flex w-full items-center justify-center'>
+            <span className='text-grayscale-4 body-14 text-center whitespace-pre-line'>
+              {t('home.result_empty')}
+            </span>
+          </div>
+        ))}
     </div>
   );
 }

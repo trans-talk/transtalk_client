@@ -12,7 +12,8 @@
   "home": {
     "header": "Chats",
     "search": "Type a search text..",
-    "empty": "You have no chat history.\nCreate a chat room and start a conversation!"
+    "empty": "You have no chat history.\nCreate a chat room and start a conversation!",
+    "result_empty": "No results match your search."
   },
   "addChat": {
     "title": "New chat",
