@@ -15,16 +15,15 @@ interface GetChatRoomResponse extends BaseResponse {
   data: ChatRoomListData;
 }
 
-export const getChatRoomListApi = async (page: number) => {
+export const getChatRoomListApi = async (page: number, name?: string) => {
   const response = await apiRequest<GetChatRoomResponse>({
     endpoint: '/chatRooms',
     method: 'GET',
     params: {
       page,
+      name,
     },
   });
-
-  console.log(response);
 
   return response.data;
 };

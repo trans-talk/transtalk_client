@@ -3,12 +3,14 @@ import ChatItem from '@pages/Home/components/ChatItem';
 import { useChatRoomListQuery } from '@pages/Home/hooks/use-chat-room-list-query';
 import Loading from '@components/Loading';
 
-interface ChatListProps {}
+interface ChatListProps {
+  searchText: string;
+}
 
-export default function ChatList({}: ChatListProps) {
+export default function ChatList({ searchText }: ChatListProps) {
   const { t } = useTranslation();
   const { listBottomRef, chatList, isFetchingNextPage, isPendingChatRoomList } =
-    useChatRoomListQuery();
+    useChatRoomListQuery(searchText);
 
   if (isPendingChatRoomList) {
     return (

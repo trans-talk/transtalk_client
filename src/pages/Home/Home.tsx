@@ -19,6 +19,7 @@ export default function Home() {
 
   const {
     isModalOpen,
+    searchTextInput,
     searchText,
     isSearchMode,
     handleChangeSearchText,
@@ -33,7 +34,7 @@ export default function Home() {
     <div className='pt-[7rem]'>
       {isSearchMode ? (
         <SearchBar
-          value={searchText}
+          value={searchTextInput}
           handleChangeValue={handleChangeSearchText}
           handleCloseSearchMode={handleCloseSearchMode}
         />
@@ -61,7 +62,7 @@ export default function Home() {
           <h1 className='header-20'>{t('home.header')}</h1>
         </Header>
       )}
-      <ChatList />
+      <ChatList searchText={searchText} />
       {isModalOpen && <AddChatModal handleCloseModal={handleCloseModal} />}
       <FloatingAddChatButton handleOpenModal={handleOpenModal} />
       <FloatingScrollButton />

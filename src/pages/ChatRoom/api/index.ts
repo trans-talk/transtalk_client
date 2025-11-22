@@ -25,7 +25,5 @@ export const getChatHistoryApi = async (chatRoomId: string, page: number) => {
     },
   });
 
-  console.log(response);
-
   return response.data;
 };
