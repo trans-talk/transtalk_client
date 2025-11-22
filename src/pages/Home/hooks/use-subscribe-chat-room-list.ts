@@ -8,7 +8,7 @@ import useStompSubscription from '@socket/hooks/use-stomp-subscription';
 import { CHAT_ROOM_LIST_QUERY_KEY } from '@/querykey/chat-room-list';
 import useUserProfile from '@pages/Settings/hooks/use-user-profile';
 
-export default function useSubscribeChatRoomList() {
+export default function useSubscribeChatRoomList(searchText: string) {
   const { userData } = useUserProfile();
   const userId = userData?.id;
 
@@ -20,9 +20,12 @@ export default function useSubscribeChatRoomList() {
       const roomId = payload.chatroomId;
 
       queryClient.setQueryData<InfiniteData<ChatRoomListData> | undefined>(
-        CHAT_ROOM_LIST_QUERY_KEY.ALL,
+        CHAT_ROOM_LIST_QUERY_KEY.SEARCH(searchText),
         prev => {
+          console.log('handleMessage prev 검사 전 로직');
+
           if (!prev || prev.pages.length === 0) return prev;
+          console.log('handleMessage prev 검사 후 로직');
 
           let found = false;
           let updatedRoom: ChatRoomType | null = null;
@@ -42,6 +45,7 @@ export default function useSubscribeChatRoomList() {
 
           // Existing room: update and move to the top
           if (found && updatedRoom) {
+            console.log('기존 채팅방이 있을 때 업데이트');
             const [first, ...rest] = pagesWithoutUpdatedRoom;
             const updatedFirst = {
               ...first,

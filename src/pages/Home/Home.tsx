@@ -15,8 +15,6 @@ import useSubscribeChatRoomList from '@pages/Home/hooks/use-subscribe-chat-room-
 export default function Home() {
   const { t } = useTranslation();
 
-  useSubscribeChatRoomList();
-
   const {
     isModalOpen,
     searchTextInput,
@@ -29,6 +27,8 @@ export default function Home() {
     handleCloseModal,
     handleToSettingPage,
   } = useChatRoomListState();
+
+  useSubscribeChatRoomList(searchText);
 
   return (
     <div className='pt-[7rem]'>
