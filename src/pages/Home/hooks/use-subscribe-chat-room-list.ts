@@ -22,10 +22,7 @@ export default function useSubscribeChatRoomList(searchText: string) {
       queryClient.setQueryData<InfiniteData<ChatRoomListData> | undefined>(
         CHAT_ROOM_LIST_QUERY_KEY.SEARCH(searchText),
         prev => {
-          console.log('handleMessage prev 검사 전 로직');
-
           if (!prev || prev.pages.length === 0) return prev;
-          console.log('handleMessage prev 검사 후 로직');
 
           let found = false;
           let updatedRoom: ChatRoomType | null = null;
