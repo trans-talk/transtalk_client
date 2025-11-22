@@ -1,5 +1,4 @@
-import { useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useCallback } from 'react';
 import type { IMessage } from '@stomp/stompjs';
 import { useQueryClient, type InfiniteData } from '@tanstack/react-query';
 
@@ -11,7 +10,6 @@ import { scrollToBottom } from '@utils/scroll';
 import type { ChatHistoryData } from '@pages/ChatRoom/api';
 
 export default function useSubscribeChatHistory(chatRoomId: string) {
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const sendMessage = (content: string) => {
@@ -24,13 +22,6 @@ export default function useSubscribeChatHistory(chatRoomId: string) {
 
     console.log('[STOMP][ChatRoom] SEND', destination, content);
   };
-
-  useEffect(() => {
-    if (!chatRoomId) {
-      alert('잘못된 접근입니다.');
-      navigate(-1);
-    }
-  }, [chatRoomId, navigate]);
 
   const handleMessage = useCallback(
     (message: IMessage) => {

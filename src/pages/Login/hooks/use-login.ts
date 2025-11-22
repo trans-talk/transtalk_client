@@ -4,6 +4,7 @@ import { getAuthorizationCode, loginApi } from '@pages/Login/api';
 import { tokenStorage } from '@utils/token';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@router/routes';
+import { ERROR_MESSAGE } from '@constant/error';
 
 export default function useLogin() {
   const navigate = useNavigate();
@@ -22,14 +23,14 @@ export default function useLogin() {
       const redirectUrl = response.data;
 
       if (!redirectUrl) {
-        alert('Empty redirect URL from /auth');
+        alert(ERROR_MESSAGE.LOGIN);
         navigate(ROUTES.LOGIN);
         return;
       }
 
       window.location.href = redirectUrl;
     } catch (e) {
-      alert(`Login error, ${e}`);
+      alert(`${ERROR_MESSAGE.LOGIN}, ${e}`);
       navigate(ROUTES.LOGIN);
     }
   };
@@ -47,7 +48,7 @@ export default function useLogin() {
       navigate(ROUTES.HOME);
     },
     onError: error => {
-      alert(`${error} error`);
+      alert(`${ERROR_MESSAGE.LOGIN}, ${error}`);
       navigate(ROUTES.LOGIN);
     },
   });

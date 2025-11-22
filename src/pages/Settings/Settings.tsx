@@ -15,7 +15,7 @@ export default function Settings() {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const { userData, isPending, isError, error } = useSettings();
+  const { userData, isPending } = useSettings();
 
   const handleGoBack = () => {
     navigate(ROUTES.HOME);
@@ -27,9 +27,6 @@ export default function Settings() {
         <Loading />
       </div>
     );
-  }
-  if (isError) {
-    alert(`Get Profile Error, ${error}`);
   }
 
   return (

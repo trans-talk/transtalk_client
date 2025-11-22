@@ -9,17 +9,19 @@ import FloatingScrollButton from '@components/FloatingScrollButton';
 import useChatHistoryQuery from '@pages/ChatRoom/hooks/use-chat-history-query';
 import { ROUTES } from '@router/routes';
 import Loading from '@components/Loading';
+import { ERROR_MESSAGE } from '@constant/error';
 
 export default function ChatRoom() {
   const navigate = useNavigate();
   const { chatRoomId } = useParams();
 
   if (!chatRoomId) {
-    alert('방 정보가 없습니다');
-    throw new Error();
+    alert(ERROR_MESSAGE.INVALID_ROOM_ID);
+    navigate(ROUTES.HOME);
+    return;
   }
 
-  const { chatContainerRef, recipient, isPending, isError } =
+  const { chatContainerRef, recipient, isPending } =
     useChatHistoryQuery(chatRoomId);
 
   const handleGoBack = () => {
@@ -32,11 +34,6 @@ export default function ChatRoom() {
         <Loading />
       </div>
     );
-  }
-
-  if (isError) {
-    alert('방정보 오류입니다.');
-    navigate(ROUTES.HOME);
   }
 
   return (

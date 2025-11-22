@@ -3,6 +3,7 @@ import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
 import { CHAT_ROOM_LIST_QUERY_KEY } from '@/querykey/chat-room-list';
 import { getChatRoomListApi, type ChatRoomListData } from '@pages/Home/api';
+import { ERROR_MESSAGE } from '@constant/error';
 
 export function useChatRoomListQuery(searchText: string) {
   const { ref: listBottomRef, inView } = useInView();
@@ -11,6 +12,7 @@ export function useChatRoomListQuery(searchText: string) {
     data,
     isPending,
     isError,
+    error,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
@@ -19,8 +21,7 @@ export function useChatRoomListQuery(searchText: string) {
     initialPageParam: 0,
     queryFn: async ({ pageParam }) => {
       const page = pageParam === null ? 0 : (pageParam as number);
-      const response = await getChatRoomListApi(page, searchText);
-      return response;
+      return await getChatRoomListApi(page, searchText);
     },
     getNextPageParam: lastPage =>
       lastPage.hasNext ? lastPage.pageNumber + 1 : undefined,
@@ -37,11 +38,14 @@ export function useChatRoomListQuery(searchText: string) {
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
+  if (isError) {
+    alert(ERROR_MESSAGE.FETCH_ROOM_LIST(error.message));
+  }
+
   return {
     listBottomRef,
     chatList: rooms,
     isPendingChatRoomList: isPending,
-    isErrorChatRoomList: isError,
     isFetchingNextPage,
   };
 }
