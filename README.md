@@ -109,6 +109,7 @@
 
 - **i18next 기반 다국어 지원**  
   i18next를 사용해 브라우저 언어 설정에 따라 UI 언어가 자동으로 적용되도록 했고, 추후 언어 확장도 용이한 구조로 설계했습니다.
+  현재는 영어와 한국어만 지원합니다.
 
 ## 📃 페이지별 기능
 
@@ -128,6 +129,7 @@
 - 효율적인 데이터 요청을 위해 무한 스크롤을 적용했습니다.
 - 웹소켓을 통해 새로운 메시지가 도착하면 채팅방 리스트가 실시간으로 업데이트됩니다.
 
+<img width="300" alt="home" src="https://github.com/user-attachments/assets/0b4de174-e035-4791-9848-4c7640676180" />
 <img width="300" alt="home" src="https://github.com/user-attachments/assets/f1b4b569-a80d-471d-a92b-821cca0b2754" />
 
 ### [검색]
