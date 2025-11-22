@@ -28,7 +28,8 @@ export default function useSettings() {
 
   const { mutate: handleLogout } = useMutation({
     mutationFn: () => logoutApi(),
-    onSuccess: () => {
+    onSuccess: response => {
+      if (response.success === false) throw Error();
       alert(SUCCESS_MESSAGE.LOGOUT);
       tokenStorage.clearTokens();
       navigate(ROUTES.LOGIN);
