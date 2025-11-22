@@ -7,7 +7,18 @@
   "settings": {
     "header": "Settings",
     "logout": "Log out",
-    "withdraw": "Delete account"
+    "withdraw": "Delete account",
+    "logoutModal": {
+      "title": "Log Out",
+      "description": "Your chat history will remain even after logging out.",
+      "confirmText": "Log Out"
+    },
+    "withdrawModal": {
+      "title": "Delete Account",
+      "description": "After deleting your account, you will no longer be able to use it,\nand all your information will be permanently removed.",
+      "confirmText": "Delete Account"
+    },
+    "cancelModal": "Cancel"
   },
   "home": {
     "header": "Chats",

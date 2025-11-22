@@ -3,6 +3,7 @@ import ModalOverlay from '@pages/ChatRoom/components/ModalOverlay';
 interface ConfirmModalProps {
   title: string;
   description: string;
+  cancelText: string;
   confirmText: string;
   handleConfirm: () => void;
   handleCancel: () => void;
@@ -11,6 +12,7 @@ interface ConfirmModalProps {
 export default function ConfirmModal({
   title,
   description,
+  cancelText,
   confirmText,
   handleConfirm,
   handleCancel,
@@ -29,7 +31,7 @@ export default function ConfirmModal({
           className='border-grayscale-3 body-14 flex-1 rounded-[1rem] border py-[1rem]'
           onClick={handleCancel}
         >
-          취소
+          {cancelText}
         </button>
         <button
           type='button'

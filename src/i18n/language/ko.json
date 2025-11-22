@@ -7,8 +7,20 @@
   "settings": {
     "header": "설정",
     "logout": "로그아웃",
-    "withdraw": "회원탈퇴"
+    "withdraw": "회원탈퇴",
+    "logoutModal": {
+      "title": "로그아웃",
+      "description": "로그아웃을 해도 기존 채팅 내역은 유지됩니다.",
+      "confirmText": "로그아웃"
+    },
+    "withdrawModal": {
+      "title": "회원탈퇴",
+      "description": "회원탈퇴 이후 계정을 다시 사용할 수 없으며,\n모든 정보는 복구할 수 없습니다.",
+      "confirmText": "회원탈퇴"
+    },
+    "cancelModal": "취소"
   },
+
   "home": {
     "header": "채팅",
     "search": "검색어를 입력하세요..",

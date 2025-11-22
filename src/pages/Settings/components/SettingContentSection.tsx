@@ -27,9 +27,9 @@ export default function SettingContentSection() {
   const handleOpenLogoutModal = () => {
     setModalState({
       isOpen: true,
-      title: '로그아웃',
-      description: '로그아웃을 해도 기존 채팅 내역은 유지됩니다.',
-      confirmText: '로그아웃',
+      title: t('settings.logoutModal.title'),
+      description: t('settings.logoutModal.description'),
+      confirmText: t('settings.logoutModal.confirmText'),
       onConfirm: handleLogout,
     });
   };
@@ -37,10 +37,9 @@ export default function SettingContentSection() {
   const handleOpenWithdrawModal = () => {
     setModalState({
       isOpen: true,
-      title: '회원탈퇴',
-      description:
-        '회원탈퇴 이후 계정을 다시 사용할 수 없으며,\n모든 정보는 복구할 수 없습니다.',
-      confirmText: '회원탈퇴',
+      title: t('settings.withdrawModal.title'),
+      description: t('settings.withdrawModal.description'),
+      confirmText: t('settings.withdrawModal.confirmText'),
       onConfirm: handleWithdraw,
     });
   };
@@ -68,6 +67,7 @@ export default function SettingContentSection() {
         <ConfirmModal
           title={modalState.title}
           description={modalState.description}
+          cancelText={t('settings.cancelModal')}
           confirmText={modalState.confirmText}
           handleConfirm={() => {
             modalState.onConfirm();
