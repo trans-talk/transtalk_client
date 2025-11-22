@@ -10,4 +10,5 @@ export const ERROR_MESSAGE = {
     `Failed to fetch user profile: ${message}`,
   LOGIN: 'An error occurred during login.',
   LOGOUT: 'An error occurred during logout.',
+  WITHDRAW: 'An error occurred during delete account.',
 } as const;

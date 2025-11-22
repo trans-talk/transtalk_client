@@ -28,7 +28,10 @@ export const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    if (config.url?.startsWith('/auth')) {
+    if (
+      config.url?.startsWith('/auth') &&
+      !(config.url?.includes('/logout') || config.url?.includes('/withdraw'))
+    ) {
       return config;
     }
 

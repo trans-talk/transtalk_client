@@ -24,3 +24,12 @@ export const logoutApi = async () => {
 
   return response;
 };
+
+export const withdrawApi = async () => {
+  const response = await apiRequest<BaseResponse>({
+    endpoint: '/auth/withdraw',
+    method: 'DELETE',
+  });
+
+  return response;
+};

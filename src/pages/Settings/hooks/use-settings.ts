@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { SETTINGS_USER_DATA_QUERY_KEY } from '@/querykey/settings';
-import { getUserDataApi, logoutApi } from '@pages/Settings/api';
+import { getUserDataApi, logoutApi, withdrawApi } from '@pages/Settings/api';
 import { ERROR_MESSAGE } from '@constant/error';
 import { tokenStorage } from '@utils/token';
 import { ROUTES } from '@router/routes';
@@ -39,9 +39,23 @@ export default function useSettings() {
     },
   });
 
+  const { mutate: handleWithdraw } = useMutation({
+    mutationFn: () => withdrawApi(),
+    onSuccess: response => {
+      if (response.success === false) throw Error();
+      alert(SUCCESS_MESSAGE.WITHDRAW);
+      tokenStorage.clearTokens();
+      navigate(ROUTES.LOGIN);
+    },
+    onError: error => {
+      alert(`${ERROR_MESSAGE.WITHDRAW} : ${error}`);
+    },
+  });
+
   return {
     userData,
     isPending,
     handleLogout,
+    handleWithdraw,
   };
 }

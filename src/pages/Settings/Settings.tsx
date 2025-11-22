@@ -12,6 +12,7 @@ import useSettings from '@pages/Settings/hooks/use-settings';
 import Loading from '@components/Loading';
 
 export default function Settings() {
+  // TODO : add confirm modal for logout & withdraw
   const navigate = useNavigate();
   const { t } = useTranslation();
 
