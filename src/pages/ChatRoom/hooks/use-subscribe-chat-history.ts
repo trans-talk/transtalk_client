@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import type { IMessage } from '@stomp/stompjs';
 import { useQueryClient, type InfiniteData } from '@tanstack/react-query';
 
@@ -11,6 +11,7 @@ import type { ChatHistoryData } from '@pages/ChatRoom/api';
 
 export default function useSubscribeChatHistory(chatRoomId: string) {
   const queryClient = useQueryClient();
+  const [isSubscribeLoading, setIsSubscribeLoading] = useState(true);
 
   const sendMessage = (content: string) => {
     const destination = `/app/chat/${chatRoomId}`;
@@ -58,11 +59,16 @@ export default function useSubscribeChatHistory(chatRoomId: string) {
     [chatRoomId]
   );
 
+  const stopSubscribeLoading = () => {
+    setIsSubscribeLoading(false);
+  };
+
   const destination = `/topic/chat/${chatRoomId}`;
   useStompSubscription({
     destination,
     handleMessage,
+    stopSubscribeLoading,
   });
 
-  return { sendMessage };
+  return { sendMessage, isSubscribeLoading };
 }

@@ -6,11 +6,13 @@ import { stompClient } from '@socket/websocket';
 interface UseStompSubscriptionParams {
   destination: string | null;
   handleMessage: (message: IMessage) => void;
+  stopSubscribeLoading: () => void;
 }
 
 export default function useStompSubscription({
   destination,
   handleMessage,
+  stopSubscribeLoading,
 }: UseStompSubscriptionParams) {
   useEffect(() => {
     if (!destination) return;
@@ -27,6 +29,7 @@ export default function useStompSubscription({
 
       subscription = stompClient.subscribe(destination, handleMessage);
       console.log('[STOMP] subscribed to', destination);
+      stopSubscribeLoading();
     };
 
     const prevOnConnect = stompClient.onConnect;

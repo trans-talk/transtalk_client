@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useQueryClient, type InfiniteData } from '@tanstack/react-query';
 import type { IMessage } from '@stomp/stompjs';
 
@@ -13,6 +13,8 @@ export default function useSubscribeChatRoomList(searchText: string) {
   const userId = userData?.id;
 
   const queryClient = useQueryClient();
+
+  const [isSubscribeLoading, setIsSubscribeLoading] = useState(true);
 
   const handleMessage = useCallback(
     (message: IMessage) => {
@@ -73,10 +75,19 @@ export default function useSubscribeChatRoomList(searchText: string) {
     [queryClient]
   );
 
+  const stopSubscribeLoading = () => {
+    setIsSubscribeLoading(false);
+  };
+
   const destination = userId ? `/topic/users/${userId}/chatRoom` : null;
 
   useStompSubscription({
     destination,
     handleMessage,
+    stopSubscribeLoading,
   });
+
+  return {
+    isSubscribeLoading,
+  };
 }

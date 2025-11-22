@@ -10,6 +10,7 @@ import useChatHistoryQuery from '@pages/ChatRoom/hooks/use-chat-history-query';
 import { ROUTES } from '@router/routes';
 import Loading from '@components/Loading';
 import { ERROR_MESSAGE } from '@constant/error';
+import useSubscribeChatHistory from '@pages/ChatRoom/hooks/use-subscribe-chat-history';
 
 export default function ChatRoom() {
   const navigate = useNavigate();
@@ -24,11 +25,13 @@ export default function ChatRoom() {
   const { chatContainerRef, recipient, isPending } =
     useChatHistoryQuery(chatRoomId);
 
+  const { isSubscribeLoading } = useSubscribeChatHistory(chatRoomId);
+
   const handleGoBack = () => {
     navigate(-1);
   };
 
-  if (isPending) {
+  if (isPending || isSubscribeLoading) {
     return (
       <div className='w-full pt-[20rem] text-center'>
         <Loading />

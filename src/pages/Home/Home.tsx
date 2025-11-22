@@ -11,6 +11,7 @@ import ChatList from '@pages/Home/components/ChatList';
 
 import useChatRoomListState from '@pages/Home/hooks/use-chat-room-list-state';
 import useSubscribeChatRoomList from '@pages/Home/hooks/use-subscribe-chat-room-list';
+import Loading from '@components/Loading';
 
 export default function Home() {
   const { t } = useTranslation();
@@ -28,7 +29,15 @@ export default function Home() {
     handleToSettingPage,
   } = useChatRoomListState();
 
-  useSubscribeChatRoomList(searchText);
+  const { isSubscribeLoading } = useSubscribeChatRoomList(searchText);
+
+  if (isSubscribeLoading) {
+    return (
+      <div className='w-full pt-[20rem] text-center'>
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <div className='pt-[7rem]'>
