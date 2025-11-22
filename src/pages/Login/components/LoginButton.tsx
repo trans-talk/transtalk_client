@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import GoogleLogo from '@assets/logo/google-logo.svg';
+import GoogleLogo from '@assets/logo/google-logo.png';
 import useLogin from '@pages/Login/hooks/use-login';
 
 export default function LoginButton() {
