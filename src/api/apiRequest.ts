@@ -70,6 +70,7 @@ export async function apiRequest<
 }
 
 // Catch errors only when the access token has expired and reissue a new access token
+const ACCESS_TOKEN_ERROR = 401 as const;
 let isRefreshing = false;
 let refreshPromise: Promise<string | null> | null = null;
 apiClient.interceptors.response.use(
@@ -81,7 +82,7 @@ apiClient.interceptors.response.use(
       _retry?: boolean;
     };
 
-    if (status !== 401) {
+    if (status !== ACCESS_TOKEN_ERROR) {
       return Promise.reject(error);
     }
 
