@@ -117,6 +117,7 @@
 - 서비스 접속 시 가장 먼저 보게 되는 화면입니다.
 - 구글 소셜 로그인을 통해 별도의 회원가입 없이 빠르게 서비스를 이용할 수 있습니다.
 
+<img width="300" alt="login" src="https://github.com/user-attachments/assets/4f64c752-d847-4630-a2c1-57a467eee788" />
 <img width="300" alt="login" src="https://github.com/user-attachments/assets/5a042da6-6a55-46b2-ae6f-1f0620e338af" />
 
 ### [홈 (채팅방 리스트)]
@@ -145,6 +146,7 @@
 - 채팅방이 성공적으로 생성되면 해당 채팅방 화면으로 바로 이동합니다.
 - 동일한 정보로 이미 존재하는 채팅방이 있다면 새로 생성되지 않고 해당 채팅방으로 이동합니다.
 
+<img width="300" alt="add-chat" src="https://github.com/user-attachments/assets/a55e30fe-f1d6-4072-bddd-0e620587c05b" />
 <img width="300" alt="add-chat" src="https://github.com/user-attachments/assets/e48a0781-b235-4b7b-abd3-60e762c861d3" />
 
 ### [채팅방]
@@ -164,6 +166,7 @@
 - 로그아웃 또는 회원탈퇴를 누르면 실수 방지를 위해 확인 모달이 한 번 더 나타납니다.
 
 <img width="300" alt="settings" src="https://github.com/user-attachments/assets/607defcf-fa18-492b-817a-e9e8caacb034" />
+<img width="300" alt="logout-modal" src="https://github.com/user-attachments/assets/22a9ef8b-4c43-4257-a047-8ce41b83c38f" />
 <img width="300" alt="logout-modal" src="https://github.com/user-attachments/assets/91ac410e-b493-4db5-9aad-e86788e1001e" />
 
 ## 🎨 화면설계서 (Figma)
