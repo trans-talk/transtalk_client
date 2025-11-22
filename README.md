@@ -106,6 +106,9 @@
 - 서비스 접속 초기화면입니다.
 - 구글 소셜 로그인으로 회원가입 없이 빠르게 서비스를 이용할 수 있습니다.
 
+<img width="300" alt="login" src="https://github.com/user-attachments/assets/5a042da6-6a55-46b2-ae6f-1f0620e338af" />
+
+
 ### [홈 (채팅방 리스트)]
 
 - 로그인 후 보여지는 메인 화면입니다.
@@ -114,11 +117,15 @@
 - 효율적인 데이터 요청을 위해 무한 스크롤 기능을 구현했습니다.
 - 웹소켓을 이용하여 받은 채팅을 실시간으로 업데이트합니다.
 
+<img width="300" alt="home" src="https://github.com/user-attachments/assets/f1b4b569-a80d-471d-a92b-821cca0b2754" />
+
 ### [검색]
 
 - 홈화면 헤더 검색 버튼을 누르면 검색어를 입력할 수 있습니다.
 - 이름을 기준으로 검색됩니다.
 - 0.5초의 디바운싱을 이벤트 처리 및 데이터 요청을 최적화했습니다.
+
+<img width="300" alt="search" src="https://github.com/user-attachments/assets/ca2b977d-32dd-42b2-a049-090bdc137f3f" />
 
 ### [새 채팅 시작하기]
 
@@ -126,6 +133,8 @@
 - 회원가입된 사용자의 e-mail과 번역 언어를 선택하여 채팅을 시작할 수 있습니다. (gmail로만 가능합니다.)
 - 번역 언어로는 한국어, 영어, 일본어, 중국어, 스페인어를 선택할 수 있습니다.
 - 채팅을 성공적으로 생성한다면 채팅방 내부로 진입합니다.
+
+<img width="300" alt="add-chat" src="https://github.com/user-attachments/assets/e48a0781-b235-4b7b-abd3-60e762c861d3" />
 
 ### [채팅방]
 
@@ -135,10 +144,16 @@
 - 역방향 무한스크롤 기능을 구현하였습니다.
 - 웹소켓을 이용한 실시간 채팅을 구현했고 새로운 메시지를 받으면 최하단으로 자동 스크롤됩니다.
 
+<img width="300" alt="chat-room" src="https://github.com/user-attachments/assets/6fe38dab-b591-4b17-9014-d29041ed130d" />
+<img width="300" alt="chat-room-2" src="https://github.com/user-attachments/assets/901f5be7-eb9c-41f2-ac83-2dcbc3652af9" />
+
 ### [설정]
 
 - 사용자 프로필 정보를 확인할 수 있고, 로그아웃 및 회원탈퇴 기능을 제공합니다.
 - 로그아웃 또는 회원탈퇴를 누르면 실수 방지를 위해 확인 모달이 한 번 더 나타납니다.
+
+<img width="300" alt="settings" src="https://github.com/user-attachments/assets/607defcf-fa18-492b-817a-e9e8caacb034" />
+<img width="300" alt="logout-modal" src="https://github.com/user-attachments/assets/91ac410e-b493-4db5-9aad-e86788e1001e" />
 
 ## 🎨 화면설계서 (Figma)
 
