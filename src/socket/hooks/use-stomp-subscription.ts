@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import type { IFrame, IMessage, StompSubscription } from '@stomp/stompjs';
 
 import { stompClient } from '@socket/websocket';
@@ -6,14 +6,18 @@ import { stompClient } from '@socket/websocket';
 interface UseStompSubscriptionParams {
   destination: string | null;
   handleMessage: (message: IMessage) => void;
-  stopSubscribeLoading: () => void;
 }
 
 export default function useStompSubscription({
   destination,
   handleMessage,
-  stopSubscribeLoading,
 }: UseStompSubscriptionParams) {
+  const [isSubscribeLoading, setIsSubscribeLoading] = useState(true);
+
+  const stopSubscribeLoading = () => {
+    setIsSubscribeLoading(false);
+  };
+
   useEffect(() => {
     if (!destination) return;
 
@@ -70,4 +74,8 @@ export default function useStompSubscription({
       stompClient.onWebSocketClose = prevOnWebSocketClose;
     };
   }, [destination, handleMessage]);
+
+  return {
+    isSubscribeLoading,
+  };
 }
