@@ -15,3 +15,12 @@ export const getUserDataApi = async () => {
 
   return response.data;
 };
+
+export const logoutApi = async () => {
+  const response = await apiRequest<BaseResponse>({
+    endpoint: '/auth/logout',
+    method: 'POST',
+  });
+
+  return response;
+};

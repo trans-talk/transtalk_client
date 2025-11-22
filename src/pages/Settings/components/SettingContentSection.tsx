@@ -5,15 +5,16 @@ import LogoutIcon from '@assets/ui/logout.svg';
 import WithdrawIcon from '@assets/ui/withdraw.svg';
 import { tokenStorage } from '@utils/token';
 import { ROUTES } from '@router/routes';
+import useSettings from '@pages/Settings/hooks/use-settings';
 
 export default function SettingContentSection() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { handleLogout } = useSettings();
 
   // TODO: add logout and withdraw handler logic
-  const handleLogout = () => {
-    tokenStorage.clearTokens();
-    navigate(ROUTES.LOGIN);
+  const handleClickLogoutButton = () => {
+    handleLogout();
   };
   const handleWithdraw = () => {
     alert('withdraw');
@@ -24,7 +25,7 @@ export default function SettingContentSection() {
     <div className='flex flex-col px-[3rem] py-[2rem]'>
       <button
         type='button'
-        onClick={handleLogout}
+        onClick={handleClickLogoutButton}
         className='flex flex-row gap-[1.5rem] py-[1.5rem]'
       >
         <img src={LogoutIcon} alt='Logout Icon' />
