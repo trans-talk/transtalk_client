@@ -1,10 +1,17 @@
 import { useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 import { stompClient } from '@socket/websocket';
+import { tokenStorage } from '@utils/token';
+import { ROUTES } from '@router/routes';
 
 export default function Layout() {
+  const navigate = useNavigate();
   useEffect(() => {
+    if (!tokenStorage.getAccessToken()) {
+      navigate(ROUTES.LOGIN);
+      return;
+    }
     stompClient.activate();
 
     return () => {

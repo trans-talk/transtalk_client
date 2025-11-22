@@ -15,7 +15,7 @@ export default function useAccount() {
     onSuccess: response => {
       if (response.success === false) throw Error();
       alert(SUCCESS_MESSAGE.LOGOUT);
-      // tokenStorage.clearTokens();
+      tokenStorage.clearTokens();
       navigate(ROUTES.LOGIN);
     },
     onError: error => {
