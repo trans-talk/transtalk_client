@@ -119,6 +119,7 @@ By chatting with friends using different translation languages, you can naturall
 - The first screen displayed when accessing the service.
 - Users can quickly start using the service via Google social login without a separate sign-up process.
 
+<img width="300" alt="login" src="https://github.com/user-attachments/assets/4f64c752-d847-4630-a2c1-57a467eee788" />
 <img width="300" alt="login" src="https://github.com/user-attachments/assets/5a042da6-6a55-46b2-ae6f-1f0620e338af" />
 
 ### [Home (Chat Room List)]
@@ -129,6 +130,7 @@ By chatting with friends using different translation languages, you can naturall
 - Infinite scroll is applied for efficient data loading.
 - When new messages arrive via WebSocket, the chat room list is updated in real time.
 
+<img width="300" alt="home" src="https://github.com/user-attachments/assets/0b4de174-e035-4791-9848-4c7640676180" />
 <img width="300" alt="home" src="https://github.com/user-attachments/assets/f1b4b569-a80d-471d-a92b-821cca0b2754" />
 
 ### [Search]
@@ -147,6 +149,7 @@ By chatting with friends using different translation languages, you can naturall
 - Once the chat room is successfully created, you are navigated directly into that chat room.
 - If a chat room with the same information already exists, a new room is not created and you are redirected to the existing chat room instead.
 
+<img width="300" alt="add-chat" src="https://github.com/user-attachments/assets/a55e30fe-f1d6-4072-bddd-0e620587c05b" />
 <img width="300" alt="add-chat" src="https://github.com/user-attachments/assets/e48a0781-b235-4b7b-abd3-60e762c861d3" />
 
 ### [Chat Room]
@@ -166,6 +169,7 @@ By chatting with friends using different translation languages, you can naturall
 - When the user selects logout or withdraw, a confirmation modal appears to prevent accidental actions.
 
 <img width="300" alt="settings" src="https://github.com/user-attachments/assets/607defcf-fa18-492b-817a-e9e8caacb034" />
+<img width="300" alt="logout-modal" src="https://github.com/user-attachments/assets/22a9ef8b-4c43-4257-a047-8ce41b83c38f" />
 <img width="300" alt="logout-modal" src="https://github.com/user-attachments/assets/91ac410e-b493-4db5-9aad-e86788e1001e" />
 
 ## 🎨 UI Design (Figma)
