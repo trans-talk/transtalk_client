@@ -2,6 +2,8 @@ export const ERROR_MESSAGE = {
   FETCH_ROOM_LIST: (message: string) =>
     `Failed to fetch chat room list: ${message}`,
   INVALID_ROOM_ID: 'No information found for this chat room.',
+  CREATE_NEW_ROOM: (message: string) =>
+    `Failed to create chat room: ${message}`,
   FETCH_CHAT_HISTORY: (message: string) =>
     `Failed to fetch chat history: ${message}`,
   FETCH_USER_DATA: (message: string) =>

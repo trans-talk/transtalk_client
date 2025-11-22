@@ -1,4 +1,5 @@
 import { CHAT_ROOM_LIST_QUERY_KEY } from '@/querykey/chat-room-list';
+import { ERROR_MESSAGE } from '@constant/error';
 import { createNewChatRoom } from '@pages/Home/api';
 import { ROUTES } from '@router/routes';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -18,7 +19,7 @@ export default function useCreateNewChatQuery(
       navigate(`${ROUTES.CHAT_ROOM}/${response.chatRoomId}`);
     },
     onError: (error: Error) => {
-      alert(error.message);
+      alert(ERROR_MESSAGE.CREATE_NEW_ROOM(error.message));
     },
   });
 
