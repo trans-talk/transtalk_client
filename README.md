@@ -1,73 +1,145 @@
-# React + TypeScript + Vite
+# 📱 Transtalk
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**TransTalk** 는 언어의 장벽 없이 소통할 수 있도록 도와주는 실시간 번역 채팅 서비스입니다.
 
-Currently, two official plugins are available:
+채팅방마다 원하는 언어를 선택하면, 보내는 메시지가 곧바로 선택된 언어로 번역되어 전달됩니다.  
+친구와 번역 언어를 설정하여 대화하다 보면, 자연스럽게 새로운 언어를 익히는 경험도 할 수 있습니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📂 프로젝트 구조
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+├── .prettierrc
+├── eslint.config.js
+├── index.html
+├── package.json
+├── README.md
+├── tailwind.config.js
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+└── vite.config.ts
+│
+├── public
+│    └── transtalk-favicon.svg
+└── src
+     ├── api
+          ├── apiRequest.ts
+          └── reissue-access-token.ts
+     ├── assets
+          ├── logo
+          │    ├── google-logo.png
+          │    └── transtalk-logo.svg
+          └── ui
+          │    ├── arrow-down.svg
+          │    ├── arrow-left.svg
+          │    ├── arrow-up.svg
+          │           .
+          │           .
+          │           .
+     ├── components
+     ├── constant
+     ├── i18n
+          ├── language
+          └── index.ts
+     ├── pages
+          ├── ChatRoom
+          │    ├── api
+          │    ├── components
+          │    ├── hooks
+          │    ├── utils
+          │    └── ChatRoom.tsx
+          ├── Home
+          │    ├── api
+          │    ├── components
+          │    ├── hooks
+          │    ├── utils
+          │    └── Home.tsx
+          ├── Login
+          │    ├── api
+          │    ├── components
+          │    ├── hooks
+          │    ├── GoogleCallback.tsx
+          │    └── Login.tsx
+          └── Settings
+          │    ├── api
+          │    ├── components
+          │    ├── hooks
+          │    └── Settings.tsx
+     ├── querykey
+     ├── router
+     ├── socket
+     ├── styles
+     ├── types
+     ├── utils
+     ├── App.tsx
+     └── main.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠 Front-end Developer Stack
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+<div align=start>
+  <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white">
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white">  
+  <img src="https://img.shields.io/badge/i18next-26A69A?style=for-the-badge&logo=i18next&logoColor=white">
+  <br/>
+  <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white">  
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">  
+  <img src="https://img.shields.io/badge/Tailwind CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
+  <br/>
+  <img src="https://img.shields.io/badge/tanstack query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white">
+  <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">
+</div>
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **배포** : `Vercel`
+- 빌드 : `Vite`
+- 다국어 지원 : `i18next`
+- 프레임워크 & 언어 : `React`, `Typescript`
+- 스타일링 : `Tailwind CSS`
+- 상태관리 : `Tanstack query`
+- 데이터 페칭 : `axios`
+- 웹소켓 : `Stompjs`, `Sockjs`
+
+## 📃 페이지별 기능
+
+### [로그인]
+
+- 서비스 접속 초기화면입니다.
+- 구글 소셜 로그인으로 회원가입 없이 빠르게 서비스를 이용할 수 있습니다.
+
+### [홈 (채팅방 리스트)]
+
+- 로그인 후 보여지는 메인 화면입니다.
+- 참여하고 있는 채팅방 리스트가 시간 순으로 정렬되어 보여집니다.
+- 각 채팅방은 상대방 프로필사진, 이름, 번역언어, 최근 메시지 시간, 원본 메시지, 번역 메시지, 안 읽은 메시지 개수가 표시됩니다.
+- 효율적인 데이터 요청을 위해 무한 스크롤 기능을 구현했습니다.
+- 웹소켓을 이용하여 받은 채팅을 실시간으로 업데이트합니다.
+
+### [검색]
+
+- 홈화면 헤더 검색 버튼을 누르면 검색어를 입력할 수 있습니다.
+- 이름을 기준으로 검색됩니다.
+- 0.5초의 디바운싱을 이벤트 처리 및 데이터 요청을 최적화했습니다.
+
+### [새 채팅 시작하기]
+
+- 홈화면 우측 하단 플로팅 버튼을 눌러 모달을 띄웁니다.
+- 회원가입된 사용자의 e-mail과 번역 언어를 선택하여 채팅을 시작할 수 있습니다. (gmail로만 가능합니다.)
+- 번역 언어로는 한국어, 영어, 일본어, 중국어, 스페인어를 선택할 수 있습니다.
+- 채팅을 성공적으로 생성한다면 채팅방 내부로 진입합니다.
+
+### [채팅방]
+
+- 상단 헤더에는 채팅 상대의 정보가 표시됩니다.
+- 채팅 내역이 시간을 기준으로 역방향으로 정렬됩니다.
+- 원본 메시지, 번역된 메시지, 채팅 시간이 표시됩니다.
+- 역방향 무한스크롤 기능을 구현하였습니다.
+- 웹소켓을 이용한 실시간 채팅을 구현했고 새로운 메시지를 받으면 최하단으로 자동 스크롤됩니다.
+
+### [설정]
+
+- 사용자 프로필 정보를 확인할 수 있고, 로그아웃 및 회원탈퇴 기능을 제공합니다.
+- 로그아웃 또는 회원탈퇴를 누르면 실수 방지를 위해 확인 모달이 한 번 더 나타납니다.
+
+## 🎨 화면설계서 (Figma)
+
+### [Transtalk - Figma](https://www.figma.com/design/ugAgyCoQFW9h2ZVzums7wf/woowaprecourse-transtalk?node-id=0-1&t=qE1K3uPh7OuhgzAt-1)
