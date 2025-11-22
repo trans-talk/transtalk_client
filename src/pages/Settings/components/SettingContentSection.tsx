@@ -2,13 +2,12 @@ import { useTranslation } from 'react-i18next';
 
 import LogoutIcon from '@assets/ui/logout.svg';
 import WithdrawIcon from '@assets/ui/withdraw.svg';
-import useSettings from '@pages/Settings/hooks/use-settings';
+import useAccount from '@pages/Settings/hooks/use-account';
 
 export default function SettingContentSection() {
   const { t } = useTranslation();
-  const { handleLogout, handleWithdraw } = useSettings();
+  const { handleLogout, handleWithdraw } = useAccount();
 
-  // TODO: add logout and withdraw handler logic
   const handleClickLogoutButton = () => {
     handleLogout();
   };

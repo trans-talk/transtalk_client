@@ -2,14 +2,14 @@ import { useCallback } from 'react';
 import { useQueryClient, type InfiniteData } from '@tanstack/react-query';
 import type { IMessage } from '@stomp/stompjs';
 
-import useSettings from '@pages/Settings/hooks/use-settings';
 import type { ChatRoomListData } from '@pages/Home/api';
 import type { ChatRoomType } from '@type/room';
 import useStompSubscription from '@socket/hooks/use-stomp-subscription';
 import { CHAT_ROOM_LIST_QUERY_KEY } from '@/querykey/chat-room-list';
+import useUserProfile from '@pages/Settings/hooks/use-user-profile';
 
 export default function useSubscribeChatRoomList() {
-  const { userData } = useSettings();
+  const { userData } = useUserProfile();
   const userId = userData?.id;
 
   const queryClient = useQueryClient();

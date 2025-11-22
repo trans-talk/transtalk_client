@@ -8,15 +8,15 @@ import ProfileSection from '@pages/Settings/components/ProfileSection';
 import SettingContentSection from '@pages/Settings/components/SettingContentSection';
 import AppFooter from '@pages/Settings/components/AppFooter';
 import { ROUTES } from '@router/routes';
-import useSettings from '@pages/Settings/hooks/use-settings';
 import Loading from '@components/Loading';
+import useUserProfile from '@pages/Settings/hooks/use-user-profile';
 
 export default function Settings() {
   // TODO : add confirm modal for logout & withdraw
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const { userData, isPending } = useSettings();
+  const { userData, isPending } = useUserProfile();
 
   const handleGoBack = () => {
     navigate(ROUTES.HOME);

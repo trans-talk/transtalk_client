@@ -1,37 +1,21 @@
+import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { SETTINGS_USER_DATA_QUERY_KEY } from '@/querykey/settings';
-import { getUserDataApi, logoutApi, withdrawApi } from '@pages/Settings/api';
+
 import { ERROR_MESSAGE } from '@constant/error';
-import { tokenStorage } from '@utils/token';
-import { ROUTES } from '@router/routes';
 import { SUCCESS_MESSAGE } from '@constant/success';
+import { logoutApi, withdrawApi } from '@pages/Settings/api';
+import { ROUTES } from '@router/routes';
+import { tokenStorage } from '@utils/token';
 
-export default function useSettings() {
+export default function useAccount() {
   const navigate = useNavigate();
-
-  const {
-    data: userData,
-    isPending,
-    isError: isErrorGetUserData,
-    error: getUserDataError,
-  } = useQuery({
-    queryKey: SETTINGS_USER_DATA_QUERY_KEY.ALL,
-    queryFn: () => getUserDataApi(),
-    staleTime: 1000 * 60 * 60,
-    retry: 0,
-  });
-
-  if (isErrorGetUserData) {
-    alert(ERROR_MESSAGE.FETCH_USER_DATA(getUserDataError.message));
-  }
 
   const { mutate: handleLogout } = useMutation({
     mutationFn: () => logoutApi(),
     onSuccess: response => {
       if (response.success === false) throw Error();
       alert(SUCCESS_MESSAGE.LOGOUT);
-      tokenStorage.clearTokens();
+      // tokenStorage.clearTokens();
       navigate(ROUTES.LOGIN);
     },
     onError: error => {
@@ -53,8 +37,6 @@ export default function useSettings() {
   });
 
   return {
-    userData,
-    isPending,
     handleLogout,
     handleWithdraw,
   };

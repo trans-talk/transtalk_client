@@ -1,4 +1,4 @@
-import useSettings from '@pages/Settings/hooks/use-settings';
+import useUserProfile from '@pages/Settings/hooks/use-user-profile';
 import type { MessageType } from '@type/message';
 import { formatMessageTime } from '@utils/time';
 
@@ -7,7 +7,7 @@ interface MessageItemProps {
 }
 
 export default function MessageItem({ message }: MessageItemProps) {
-  const { userData } = useSettings();
+  const { userData } = useUserProfile();
 
   const { senderEmail, originalMessage, translatedMessage, sendAt } = message;
   const isUser = senderEmail === userData?.email;
