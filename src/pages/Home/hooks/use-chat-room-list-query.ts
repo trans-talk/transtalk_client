@@ -17,7 +17,7 @@ export function useChatRoomListQuery(searchText: string) {
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery<ChatRoomListData>({
-    queryKey: CHAT_ROOM_LIST_QUERY_KEY.ALL,
+    queryKey: CHAT_ROOM_LIST_QUERY_KEY.SEARCH(searchText),
     initialPageParam: 0,
     queryFn: async ({ pageParam }) => {
       const page = pageParam === null ? 0 : (pageParam as number);
@@ -26,7 +26,7 @@ export function useChatRoomListQuery(searchText: string) {
     getNextPageParam: lastPage =>
       lastPage.hasNext ? lastPage.pageNumber + 1 : undefined,
     retry: 1,
-    staleTime: 1000 * 3,
+    staleTime: 1000 * 5,
     refetchOnWindowFocus: true,
   });
 
