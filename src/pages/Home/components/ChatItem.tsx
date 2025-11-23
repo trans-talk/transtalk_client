@@ -31,17 +31,17 @@ export default function ChatItem({ chat }: ChatItemProps) {
 
   return (
     <button
-      className='border-grayscale-3 flex w-full max-w-full flex-row items-start border-b p-[2rem]'
+      className='border-grayscale-3 flex flex-row items-start border-b p-[2rem]'
       type='button'
       onClick={handleToChatRoom}
     >
       <div className='flex w-full flex-row gap-[1.4rem]'>
         <img
-          className='h-[6rem] w-[6rem] rounded-full'
+          className='h-[6rem] w-[6rem] flex-shrink-0 rounded-full'
           src={recipientPicture ?? 'https://placehold.co/50'}
           alt='Profile Image'
         />
-        <div className='flex flex-1 flex-col gap-[0.5rem]'>
+        <div className='flex min-w-0 flex-1 flex-col gap-[0.5rem]'>
           <div className='flex flex-row items-center justify-between'>
             <div className='flex flex-row items-center gap-[0.8rem]'>
               <span className='title-16'>{recipientName}</span>
@@ -56,7 +56,7 @@ export default function ChatItem({ chat }: ChatItemProps) {
             )}
           </div>
           <div className='flex flex-row items-center justify-between'>
-            <div className='flex max-w-[60%] flex-col items-start'>
+            <div className='flex max-w-[60%] min-w-0 flex-col items-start'>
               <span className='body-14 truncate'>{originalRecentMessage}</span>
               <span className='body-12 text-grayscale-4 truncate'>
                 {translatedRecentMessage}
