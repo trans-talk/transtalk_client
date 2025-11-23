@@ -57,10 +57,10 @@ export default function ChatItem({ chat }: ChatItemProps) {
           </div>
           <div className='flex flex-row items-center justify-between'>
             <div className='flex flex-col items-start'>
-              <span className='body-14 max-w-3/5 text-ellipsis'>
+              <span className='body-14 max-w-3/5 truncate'>
                 {originalRecentMessage}
               </span>
-              <span className='text-grayscale-4 body-12 max-w-3/5 text-ellipsis'>
+              <span className='text-grayscale-4 body-12 max-w-3/5 truncate'>
                 {translatedRecentMessage}
               </span>
             </div>
